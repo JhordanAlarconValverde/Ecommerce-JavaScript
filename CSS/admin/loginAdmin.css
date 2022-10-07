@@ -1,0 +1,96 @@
+*{margin:0;padding: 0;box-sizing: border-box;}
+.body{ background: rgb(243, 136, 15);overflow: hidden;}
+
+.container-log-reg{
+    max-width: 520px;
+    min-width: 300px;
+    height: auto;
+    background: #fff;
+    border-radius: 12px;
+    /* transform: rotateX(360deg); */
+}
+
+.container-log,.container-reg{
+    padding: 10px 20px;
+    display: none;
+    /* border: 2px solid red; */
+}
+.container-log,
+.container-reg{
+    height: 450px;
+}
+/* .container-log{ display: none;} */
+.container-reg{ display:  block; }
+
+.displayReg,.displayLogin{ cursor: pointer;}
+.displayReg:hover,.displayLogin:hover{ color: #909090;}
+
+.close-alert-success,.close-alert-error{
+    font-size: 1.2rem;
+    font-weight: 700;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    cursor: pointer;
+}
+
+
+/* .showLog{
+    animation: transformLog 4s ease;
+}
+.showReg{
+    animation: transformLog 4s ease;
+}
+
+@keyframes transformLog{
+    from { transform: rotateY(0);}
+    to { transform: rotateY(180deg);}
+}
+@keyframes transformReg{
+    from { transform: rotateY(180deg);}
+    to { transform: rotateY(0);}
+} */
+
+/* .modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.5);
+    display: none;
+    overflow: hidden;
+    display: block;
+}
+
+.modal .content{
+    max-width: 520px;
+    min-width: 300px;
+    height: auto;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.openModal{ cursor: pointer; }
+.openModal:hover{ text-decoration: underline;}
+.closeModal{
+    font-size: 1.8rem;color: gray;cursor:pointer;
+}
+
+.close-alert-success,.close-alert-error{
+    font-size: 1.4rem;
+    font-weight: 700;
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close-alert-success,.close-alert-error::selection{background: none;}
+
+.alert{
+    display: none;
+}*/
+
+
+@media screen and (max-width: 630px){
+    .body{background: #fff;}
+}

@@ -1,0 +1,1094 @@
+*{margin: 0;padding: 0;box-sizing: border-box;}
+:root{
+    --font-family: monospace;
+    --font-h1: 2.4rem;
+    --font-h3: 1.5rem;
+    --text-align: center;
+}
+
+/* CONTENEDOR PRIMARIO */
+.contenedor-primary{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+}
+
+/* NAV */
+.contenedor-primary .contenedor-nav{
+    height: 100vh;
+    width: 260px;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-family);
+    position: fixed;
+    z-index: 200;
+    /* transition: all 800ms ease; */
+}
+
+/* ONTOGGLE */
+.contenedor-primary .contenedor-nav-100{
+    width: 100px;
+    /* transition: all 800ms ease-in; */
+}
+
+.text-none-100{
+    display: none;
+}
+
+.contenedor-primary .contenedor-nav .group{
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ddd;
+}
+
+.contenedor-primary .contenedor-nav .group i{
+    font-size: 3.9rem;
+}
+
+.contenedor-primary .contenedor-nav .group h1{
+    font-size: 2.5rem;
+    margin-left: 5px;
+}
+
+.contenedor-primary .contenedor-nav .ul-nav{
+    margin-top: 10px;
+    list-style: none;
+}
+
+.contenedor-primary .contenedor-nav .ul-nav .li-nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 20px 20px 20px 2px;
+    font-size: var(--font-h3);
+    cursor: pointer;
+    position: relative;
+}
+
+.contenedor-primary .contenedor-nav .ul-nav .li-nav:hover{
+    transition: all 200ms;
+    background: #222;
+}
+
+.contenedor-primary .contenedor-nav .ul-nav .li-nav .fas,.fab{
+    font-size: 1.2rem;
+    width: 45px;
+    text-align: var(--text-align);
+}
+
+.contenedor-primary .contenedor-nav .ul-nav .li-nav span{
+    text-align: center;
+}
+
+    /* DROPDOWN */
+
+    .contenedor-primary .contenedor-nav .ul-nav .dropdown{
+        text-align: center;
+        background: #333;
+        display: block;
+    }
+
+    .contenedor-primary .contenedor-nav .ul-nav .dropdown .text-drop{
+        font-size: 1.1rem;
+        font-family: sans-serif;
+        letter-spacing: 1.6px;
+        display: block;
+        padding: 5px;
+        cursor: pointer;
+        color: gray;
+    }
+
+    .contenedor-primary .contenedor-nav .ul-nav .dropdown .text-drop:hover{
+        color: #ddd;
+    }
+
+    .contenedor-primary .contenedor-nav .ul-nav .dropdown .text-size-100{
+        font-size: .8rem;
+    }
+
+/* CONTENT */
+.contenedor-primary .contenedor-content{
+    width: 100%;
+    min-width: 500px;
+    margin-left: 260px;
+    height: 100%;
+    /* border: 2px solid red; */
+    position: relative;
+}
+
+.contenedor-primary .marginLeft-100{
+    margin-left: 100px;
+}
+
+/* CONTENEDOR BARS */
+.contenedor-bars{
+    padding: 10px 0 5px 5px;
+}
+
+.contenedor-bars .bar-group{
+    width: 40px;
+    cursor: pointer;
+}
+
+.contenedor-bars .bar-group .bar{
+    display: block;
+    width: 32px;
+    height: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    background: #000;
+}
+
+.bars-click {
+    margin-left: 60px;
+    transition: all 2s ease;
+}
+
+.nav-hidden{
+    width: 60px;
+}
+
+/* PRODUCTOS DISPONIBLES */
+/* PRODUCTOS AGOTADOS */
+.contenedor-content .contenedor-productos,
+.contenedor-content .contenedor-productos-agotados,
+.contenedor-content .contenedor-clientes,
+.contenedor-content .contenedor-empleados-vendedores,
+.contenedor-content .contenedor-empleados-repartidores,
+.contenedor-content .contenedor-ventas,
+.contenedor-content .contenedor-verPerfil{
+    width: 100%;
+    height: 100%;
+    padding: 15px 10px 10px 10px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.contenedor-content .contenedor-productos .text-title-page,
+.contenedor-content .contenedor-productos-agotados .text-title-page,
+.contenedor-content .contenedor-clientes .text-title-page,
+.contenedor-content .contenedor-empleados-vendedores .text-title-page,
+.contenedor-content .contenedor-empleados-repartidores .text-title-page,
+.contenedor-content .contenedor-ventas .text-title-page{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 10px;
+}
+
+.contenedor-content .contenedor-productos .txtBuscarProductoD,
+.contenedor-content .contenedor-productos-agotados .PA-txtBuscarProducto,
+.contenedor-content .contenedor-clientes .CCL-txtBuscarCliente,
+.contenedor-content .contenedor-empleados-vendedores .CEV-txtBuscarEmpleado,
+.contenedor-content .contenedor-empleados-repartidores .CER-txtBuscarEmpleado,
+.contenedor-content .contenedor-ventas .CV-txtBuscarVentas{
+    width: 100%;
+    padding: 5px 50px 5px 5px;
+    font-size: 1.1rem;
+    outline: none;
+    border: thin solid #909090;
+    margin-bottom: 15px;
+}
+
+.contenedor-content .contenedor-productos .txtBuscarProductoD:focus,
+.contenedor-content .contenedor-productos-agotados .PA-txtBuscarProducto:focus,
+.contenedor-content .contenedor-clientes .CCL-txtBuscarCliente:focus,
+.contenedor-content .contenedor-empleados-vendedores .CEV-txtBuscarEmpleado:focus,
+.contenedor-content .contenedor-empleados-repartidores .CER-txtBuscarEmpleado:focus,
+.contenedor-content .contenedor-ventas .CV-txtBuscarVentas:focus{
+    border: thin solid blue;
+}
+
+.contenedor-content .contenedor-productos .btn-add-producto{
+    border:none;
+    padding: 0.375rem 0.75rem;
+    color:#fff;
+    background: #007bff;
+    margin: 0 0 10px 0;
+    cursor:pointer;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos,
+.contenedor-content .contenedor-clientes .CCL-table-clientes,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores,
+.contenedor-content .contenedor-ventas .CV-table-ventas{
+    font-family: arial, sans-serif;
+    width: 100%;
+    min-width: 850px;
+    position: relative;
+    border-collapse: collapse;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles th,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos th,
+.contenedor-content .contenedor-clientes .CCL-table-clientes th,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores th,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores th,
+.contenedor-content .contenedor-ventas .CV-table-ventas th{
+    text-align: center;
+    padding: 8px;
+    border-collapse: collapse;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles td,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos td,
+.contenedor-content .contenedor-clientes .CCL-table-clientes td,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores td,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores td,
+.contenedor-content .contenedor-ventas .CV-table-ventas td{
+    text-align: center;
+    padding: 3px 5px;
+    margin:0;
+}
+    
+.contenedor-content .contenedor-productos .table-disponibles tr:nth-child(even),
+.contenedor-content .contenedor-productos-agotados .PA-table-productos tr:nth-child(even),
+.contenedor-content .contenedor-clientes .CCL-table-clientes tr:nth-child(even),
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores tr:nth-child(even),
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores tr:nth-child(even),
+.contenedor-content .contenedor-ventas .CV-table-ventas tr:nth-child(even){
+    background-color: #eee;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .button-td,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .button-td{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .button-td .btnEditarProducto,
+.contenedor-content .contenedor-productos .table-disponibles .button-td .btnEliminarProducto,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .button-td .PA-btnEditarProducto,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .button-td .PA-btnEliminarProducto,
+.contenedor-content .contenedor-clientes .CCL-table-clientes .button-td .CCL-btnEliminarCliente,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .button-td .CEV-btnEliminarEmpleado,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .button-td .CER-btnEliminarEmpleado,
+.contenedor-content .contenedor-ventas .CV-table-ventas .button-td .CV-btnEliminarVenta{
+    background: blue;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin: 1px;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .button-td .btnEliminarProducto,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .button-td .PA-btnEliminarProducto,
+.contenedor-content .contenedor-clientes .CCL-table-clientes .button-td .CCL-btnEliminarCliente,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .button-td .CEV-btnEliminarEmpleado,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .button-td .CER-btnEliminarEmpleado,
+.contenedor-content .contenedor-ventas .CV-table-ventas .button-td .CV-btnEliminarVenta{
+    background: red;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .img-table,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .img-table,
+.contenedor-content .contenedor-clientes .CCL-table-clientes .img-table,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .img-table,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .img-table,
+.contenedor-content .contenedor-ventas .CV-table-ventas .img-table{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.btnEditarProducto,.btnEliminarProducto,
+.PA-btnEditarProducto,.PA-btnEliminarProducto,
+.CCL-btnEliminarCliente,
+.CEV-btnEliminarEmpleado,
+.CER-btnEliminarEmpleado,
+.CV-btnEliminarVenta{
+    cursor: pointer;
+    display: inline-block;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .td-descripcion,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .td-descripcion{
+    position: relative;
+    max-width: 300px;
+    min-width: 300px;
+    text-align: left;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .td-primary,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .td-primary{
+    position: relative;
+    max-width: 90px;
+    min-width: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .td-descripcion .td-descripcion-pseudo,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .td-descripcion .td-descripcion-pseudo{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.contenedor-content .contenedor-productos .table-disponibles .td-primary .td-primary-pseudo,
+.contenedor-content .contenedor-productos-agotados .PA-table-productos .td-primary .td-primary-pseudo{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.contenedor-content .contenedor-clientes .CCL-table-clientes .td-overflow,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .td-overflow,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow,
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow{
+    max-width: 120px;
+    width: 120px;
+    /* border:1px solid blue; */
+    margin: auto;
+}
+
+.contenedor-content .contenedor-clientes .CCL-table-clientes .td-overflow-correo,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .td-overflow-correo,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow-correo,
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow-correo{
+    max-width: 320px;
+    width: 320px;
+}
+
+.contenedor-content .contenedor-clientes .CCL-table-clientes .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow .td-text-overflow{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow{
+    max-width: 100px;
+    width: 100px;
+    /* border:1px solid blue; */
+    margin: auto;
+}
+
+.contenedor-content .contenedor-clientes .CCL-table-clientes .td-overflow-correo,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .td-overflow-correo,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow-correo,
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow-correo{
+    max-width: 200px;
+    width: 200px;
+}
+
+.contenedor-content .contenedor-clientes .CCL-table-clientes .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-vendedores .CEV-table-empleados-vendedores .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-ventas .CV-table-ventas .td-overflow .td-text-overflow,
+.contenedor-content .contenedor-empleados-repartidores .CER-table-empleados-repartidores .td-overflow .td-text-overflow{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+
+
+
+/* FORM PRODUCTOS DISPONIBLES */
+/* FORM PRODUCTOS AGOTADOS */
+.myFormProducto,
+.PA-myFormProducto{
+    width: 500px;
+    margin: 0 auto 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eee;
+    display: none;
+    position: relative;
+}
+
+.myFormProducto h2,
+.PA-myFormProducto h2{
+    text-align: center;
+    padding: 10px;
+    background: #ddd;
+}
+
+.myFormProducto .btnCloseForm,
+.PA-myFormProducto .PA-btnCloseForm{
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size: 2rem;
+    font-weight: 700;
+    color:#909090;
+    cursor:pointer;
+}
+
+.myFormProducto .btnCloseForm:hover,
+.PA-myFormProducto .PA-btnCloseForm:hover{ color: #000; }
+
+.myFormProducto .btnCloseForm::selection,
+.PA-myFormProducto .PA-btnCloseForm:hover::selection{ background: none;}
+
+.myFormProducto .group,
+.PA-myFormProducto .PA-group{
+    margin: 15px 0 0 0;
+    padding: 0 10px;
+    position: relative;
+}
+
+.myFormProducto .group label,
+.PA-myFormProducto .PA-group label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.myFormProducto .group input,
+.myFormProducto .group #txtCategoriaProd,
+.PA-myFormProducto .PA-group input,
+.PA-myFormProducto .PA-group #PA-txtCategoriaProd{
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    font-size: 1.1rem;
+    border: thin solid #000;
+}
+
+
+.myFormProducto .group textarea,
+.PA-myFormProducto .PA-group textarea{
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    outline: none;
+    font-size: 1.1rem;
+    border: thin solid #000;
+    text-align: left;
+}
+
+.myFormProducto .group input:focus ,
+.myFormProducto .group textarea:focus,
+.myFormProducto .group #txtCategoriaProd:focus,
+.PA-myFormProducto .PA-group input:focus,
+.PA-myFormProducto .PA-group textarea:focus,
+.PA-myFormProducto .PA-group #PA-txtCategoriaProd:focus{
+    border: thin solid blue;
+}
+
+.myFormProducto .button,
+.PA-myFormProducto .PA-button{
+    padding: 10px;
+}
+
+.myFormProducto .button button[type="submit"],button[type="reset"],
+.PA-myFormProducto .PA-button button[type="submit"],button[type="reset"]{
+    padding: 12px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    background: green;
+    border-radius: 5px;
+}
+
+.myFormProducto .button button[type="reset"],
+.PA-myFormProducto .PA-button button[type="reset"]{ background: red;}
+
+.PrevimgRefProd,
+.PA-PrevimgRefProd{
+    margin: auto;
+    width: 50%;
+    height: 50%;
+}
+
+/* ADD PRODUCTO */
+.AddmyFormProducto{
+    width: 500px;
+    margin: 0 auto 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eee;
+    display: none;
+    position: relative;
+}
+
+.AddmyFormProducto h2{
+    text-align: center;
+    padding: 10px;
+    background: #ddd;
+}
+
+.AddmyFormProducto .AddbtnCloseForm{
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size: 2rem;
+    font-weight: 700;
+    color:#909090;
+    cursor:pointer;
+}
+
+.AddmyFormProducto .AddbtnCloseForm:hover{ color: #000; }
+.AddmyFormProducto .AddbtnCloseForm::selection{ background: none;}
+.AddmyFormProducto .group{
+    margin: 15px 0 0 0;
+    padding: 0 10px;
+    position: relative;
+}
+
+.AddmyFormProducto .group label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.AddmyFormProducto .group input,
+.AddmyFormProducto .group #txtAddCategoriaProd{
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    font-size: 1.1rem;
+    border: thin solid #000;
+}
+
+.AddmyFormProducto .group textarea{
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    outline: none;
+    font-size: 1.1rem;
+    border: thin solid #000;
+    text-align: left;
+}
+
+.AddmyFormProducto .group input:focus ,
+.AddmyFormProducto .group textarea:focus,
+.AddmyFormProducto .group #txtAddCategoriaProd:focus{
+    border: thin solid blue;
+}
+
+.AddmyFormProducto .Addbutton{
+    padding: 10px;
+}
+
+.AddmyFormProducto .Addbutton button[type="submit"],button[type="reset"]{
+    padding: 12px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    background: green;
+    border-radius: 5px;
+}
+
+.AddmyFormProducto .Addbutton button[type="reset"] { background: red;}
+
+.AddPrevimgRefProd{
+    width: 100%;
+    height:100%;
+}
+
+/* DASHBOARD */
+.contenedor-content .contenedor-dashboard{
+    background: #eee;
+    width: 100%;
+    height: 100%;
+    padding: 15px 10px 10px 10px;
+    /* border: 2px solid blue; */
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* .home-section {
+    position: relative;
+    background: var(--homeSectionBgColor);
+    transition: all 0.5s ease;
+    margin-left: 270px;
+} */
+
+/* .sidebar.close ~ .home-section {
+    margin-left: 78px;
+}
+
+.home-section .home-content {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-left: -5px;
+} */
+
+    /* .home-section .home-content .fa-bars, .home-section .home-content .text {
+        color: var(--sidebarBgColor);
+        font-size: 35px;
+    }
+
+    .home-section .home-content .fa-bars {
+        margin: 0 20px;
+        cursor: pointer;
+    } */
+
+.contenedor-content .contenedor-dashboard .group-welcome {
+    /* border: 2px solid blue; */
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedor-content .contenedor-dashboard .group-welcome .group-welcome-img{
+    width: 60px;
+    height: 60px;
+}
+
+.contenedor-content .contenedor-dashboard .group-welcome .group-welcome-text{
+    margin-left: 5px;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard{
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1230px;
+    margin: auto;
+}
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: auto;
+    margin: auto;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-header .analytics{
+    text-align: center;
+    width: 290px;
+    min-width: 200px;
+    padding: 30px 10px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #c9cbce;
+    margin: 0 5px
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    
+    /* flex-direction: column; */
+}
+
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-reportes-stock,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-mas-vendidos,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña{
+    background: #fff;
+    padding: 30px 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #c9cbce;
+    /* flex: 50; */
+    margin: 0 5px;
+    max-width: 600px;
+    width: 600px;
+    min-width: 400px;
+    position: relative;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-reportes-stock span,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-mas-vendidos span{
+    font-size: 1.5rem;
+    margin-left: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-reportes-stock .table-stock,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-reportes-vendidos .table-mas-vendidos .table-more{
+    width: 100%;
+    margin-top: 10px;
+    border: thin solid gray;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* F E C H A */
+
+.calendar__info{
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.calendar__prev,.calendar__next{
+    color: gray;
+    cursor: pointeR;
+    font-size: 1.4rem;
+}
+
+.calendar__prev{
+    margin-right: auto;
+}
+.calendar__next{
+    margin-left: auto;
+}
+.calendar__week,.calendar__dates{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap: 10px;
+}
+.calendar__month,.calendar__year{
+    padding: .5em 1em;
+}
+.calendar__item{
+    text-align: center;
+    line-height: 2;
+}
+
+.calendar__day-active{
+    background: red;
+    color: #fff;
+    width: 50%;
+    /* border-radius: 50%; */
+    margin: auto;
+}
+
+.calendar__last-days{
+    opacity: .5;
+}
+
+.calendar__days-hover:hover{
+    background: red;
+    transition: all 50ms;
+    width: 50%;
+    margin: auto;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* DIAGRAMA RESEÑA */
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña .diagrama{
+    width: 100%;
+    height: auto;
+    /* background: green; */
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    /* margin: auto; */
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña .diagrama .content-diagrama{
+    width: 100%;
+    height: 100%;
+    /* background: red; */
+    animation: contentDiagrama 300ms ease-in;
+    /* margin: auto; */
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña .diagrama .content-diagrama .grafico-categoria-vendido{
+    width: 100%;
+    height: 100%;
+    min-width: 100px;
+    /* background: red; */
+}
+/* .contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña .diagrama .content-diagrama .grafico-categoria-vendido{
+    width: 50%;
+    height: 200px;
+} */
+
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .diagrama-reseña .diagrama-botones .link-diagrama{
+    background: #ddd;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;;
+}
+/* .contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__info{
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__info .calendar__month,.calendar__year{
+    padding: .5em 1em;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__prev,.calendar__next{
+    color: gray;
+    cursor: pointeR;
+    font-size: 1.4rem;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__prev{
+    margin-right: auto;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__next{
+    margin-left: auto;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__week,
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__dates{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap: 10px;
+}
+
+.contenedor-content .contenedor-dashboard .group-dashboard .analytics-content-calendario-diagrama .calendarrio-fecha .calendar__week .calendar__item{
+    text-align: center;
+    line-height: 2;
+} */
+
+
+
+@keyframes contentDiagrama{
+    from{
+transform: translateY(600px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+/* .table-reportes-stock,.table-mas-vendidos{
+    background: #fff;
+    padding: 30px 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #c9cbce;
+    flex: 50;
+    margin: 0 5px;
+}
+
+.table-reportes-stock span,.table-mas-vendidos span{
+    font-size: 1.5rem;
+    margin-left: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-reportes-stock .table-stock,.table-mas-vendidos .table-more{
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #000;
+    border-collapse: collapse;
+} */
+
+.contenedor-productos,
+.contenedor-productos-agotados,
+.contenedor-clientes,
+.contenedor-empleados-vendedores,
+.contenedor-empleados-repartidores,
+.contenedor-ventas,
+.contenedor-verPerfil{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+@media only screen and (max-width: 1150px){
+    .contenedor-content .contenedor-dashboard{ background: red;}
+} */
+
+/* 
+.analitycs-section {
+    background: #F4F7FA;
+    width: 100%;
+    margin-left: -5px;
+}
+
+    .analitycs-section .analytics-content {
+        margin: 0 20px;
+        border-radius: 20px;
+    }
+
+        .analitycs-section .analytics-content .analytics-content-row {
+            text-align: center;
+            padding: 30px 30px;
+        }
+
+            .analitycs-section .analytics-content .analytics-content-row .analytics {
+                padding: 30px 10px;
+                background: #fff;
+                border-radius: 20px;
+                box-shadow: 5px 5px 5px #c9cbce;
+            }
+
+    .analitycs-section .analytics-chart {
+        display: flex;
+        justify-content: center;
+        background: #fff;
+        padding: 20px 20px;
+        border-radius: 20px;
+        margin-left: 20px;
+        box-shadow: 2px 2px 5px #c9cbce;
+    }
+
+    .analitycs-section .recent-sells {
+        padding: 20px 20px;
+        background: #fff;
+        border-radius: 20px;
+        margin-right: 10px;
+        box-shadow: 2px 2px 5px #c9cbce;
+    }
+
+    .analitycs-section .analytics-chartPie {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #fff;
+        padding: 20px 20px;
+        border-radius: 20px;
+        margin-right: 20px;
+        box-shadow: 2px 2px 5px #c9cbce;
+    }
+
+    .analitycs-section .table-reports {
+        padding: 20px 20px;
+        background-color: white;
+        border-radius: 20px;
+        margin: 20px 0px;
+        margin-left: 15px;
+        box-shadow: 2px 2px 5px #c9cbce;
+    } */
+
+    /* .txtResumen {
+    padding-left: 50px;
+    font-size: 25px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+/* ADD EMPLEADO VENDEDOR */
+/* ADD EMPLEADO REPARTIDOR */
+.contenedor-content  .contenedor-registro-empleados{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    display: none;
+}
+
+.AddEmpleado{
+    width: 500px;
+    height: auto;
+    max-height: 600px;
+    overflow: auto;
+    margin: 0 auto 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eee;
+    position: relative;
+}
+
+.AddEmpleado h2{
+    text-align: center;
+    padding: 10px;
+    background: #ddd;
+}
+
+.AddEmpleado .closeForm{
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size: 2rem;
+    font-weight: 700;
+    color:#909090;
+    cursor:pointer;
+}
+
+.AddEmpleado .closeForm:hover{ color: #000; }
+.AddEmpleado .closeForm::selection{ background: none;}
+.AddEmpleado .group{
+    display: flex;
+    margin: 15px 0 0 0;
+    padding: 0 10px;
+    position: relative;
+}
+
+.AddEmpleado .group div,.AddEmpleado .group #AE-txtCargo{
+    margin: 0 10px;
+}
+
+.AddEmpleado .group label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.AddEmpleado .group input,
+.AddEmpleado .group #AE-txtCargo{
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    font-size: 1.1rem;
+    border: thin solid #000;
+}
+
+.AddEmpleado .group #AE-txtCargo{
+    width: 220px;
+    margin-left: -1px;
+}
+
+.AddEmpleado .group input:focus ,
+.AddEmpleado .group #AE-txtCargo:focus{ border: thin solid blue; }
+
+.AddEmpleado .Addbutton{ padding: 10px; }
+
+.AddEmpleado .Addbutton button[type="submit"],button[type="reset"]{
+    padding: 12px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    background: green;
+    border-radius: 5px;
+}
+
+.AddEmpleado .Addbutton button[type="reset"] { background: red;}
+
+.AddPrevimgRefEmp{ width: 100%; height:100%; }
+

@@ -1,0 +1,3262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Index</title>
+    <link rel="stylesheet" href="../../CSS/admin/admin.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        if (sessionStorage.AdminLogeados == null || sessionStorage.AdminLogeados == "") {
+            location.href = "login.html";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="contenedor-primary">
+        <div class="contenedor-nav">
+            <div class="group">
+                <i class="fas fa-desktop"></i>
+                <h1>PeruTec</h1>
+                <!-- <img class="img-logo" src="" alt="PeruTec">    -->
+            </div>
+
+            <ul class="ul-nav">
+                <li class="li-nav link-nav"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></li>
+                <li class="li-nav"><i class="fab fa-product-hunt"></i><span>Productos</span><i
+                        style="position: absolute;right: 0;" class="fas fa-sort-down link-drop link-drop-left"></i></li>
+                <div class="dropdown">
+                    <span class="text-drop link-nav">Disponibles</span>
+                    <span class="text-drop link-nav">Agotados</span>
+                </div>
+                <li class="li-nav link-nav"><i class="fas fa-users"></i><span>Clientes</span>
+                    <!--<i style="position: absolute;right: 0;" class="fas fa-sort-down"></i>-->
+                </li>
+                <li class="li-nav"><i class="fas fa-user-tie"></i><span>Empleados</span><i
+                        style="position: absolute;right: 0;" class="fas fa-sort-down link-drop link-drop-left"></i></li>
+                <div class="dropdown">
+                    <span class="text-drop link-nav">Vendedores</span>
+                    <span class="text-drop link-nav">Repartidores</span>
+                    <span class="text-drop link-add-emp">Agregar</span>
+                </div>
+                <li class="li-nav link-nav"><i class="fas fa-balance-scale-right"></i><span>Ventas</span></li>
+                <li class="li-nav link-drop"><i class="fas fa-user-cog"></i><span>Perfil</span></li>
+                <div class="dropdown">
+                    <!-- <span class="text-drop link-nav">Ver Perfil</span> -->
+                    <span class="text-drop text-drop-cerrar-session">Cerrar SesSion</span>
+                </div>
+            </ul>
+        </div>
+        <div class="contenedor-content">
+
+            <div class="contenedor-bars">
+                <div class="bar-group">
+                    <div class="bar bar-1"></div>
+                    <div class="bar bar-2"></div>
+                    <div class="bar bar-3"></div>
+                </div>
+            </div>
+
+            <section class="contenedor-dashboard  content-link">
+
+                <!-- <div class="analitycs-section"> -->
+                <div class="group-welcome">
+                    <img src="../../IMG/userlogin.png" class="group-welcome-img">
+                    <span class="group-welcome-text"></span>
+                </div>
+
+                <div class="group-dashboard">
+                    <div class="analytics-content-header">
+                        <div class="analytics">
+                            <span>Ventas realizadas</span>
+                            <h4 id="count_ventas_realizadas">0</h4>
+                        </div>
+                        <div class="analytics">
+                            <span>Ventas en espera</span>
+                            <h4 id="count_ventas_espera">0</h4>
+                        </div>
+                        <div class="analytics">
+                            <span>Usuarios registrados</span>
+                            <h4 id="count_usuarios_registrados">0</h4>
+                        </div>
+                        <div class="analytics">
+                            <span>Categoria mas vendida</span>
+                            <h4 id="categoria_mas_vendida">0</h4>
+                        </div>
+                    </div>
+
+                    <div class="analytics-content-reportes-vendidos">
+                        <div class="table-reportes-stock">
+                            <span>Reportes de stock</span>
+                            <table class="table-stock">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: .8rem;" class="tbody-stock-dashboard"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-mas-vendidos">
+                            <span>Ultimas ventas realizadas</span>
+                            <table class="table-more">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>Usuario</th> -->
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Ciudad</th>
+                                        <th>Condicion</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: .8rem;" class="tbody-more-dashboard"></tbody>
+                            </table>
+                            <!-- <span>Productos más vendidos</span>
+                            <table class="table-more">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Ciudad</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: .8rem;" class="tbody-more-dashboard"></tbody>
+                            </table> -->
+                        </div>
+                    </div>
+
+                    <div class="analytics-content-calendario-diagrama">
+                        <div class="calendarrio-fecha">
+                            <div class="calendar__info">
+                                <div class="calendar__prev" id="prev-month">&#9664;</div>
+                                <div class="calendar__month" id="month">March</div>
+                                <div class="calendar__year" id="year">2020</div>
+                                <div class="calendar__next" id="next-month">&#9654;</div>
+                            </div>
+                            <div class="calendar__week">
+                                <div class="calendar__day calendar__item">Mon</div>
+                                <div class="calendar__day calendar__item">Tue</div>
+                                <div class="calendar__day calendar__item">Wed</div>
+                                <div class="calendar__day calendar__item">Thu</div>
+                                <div class="calendar__day calendar__item">Fri</div>
+                                <div class="calendar__day calendar__item">Sat</div>
+                                <div class="calendar__day calendar__item">Sun</div>
+                            </div>
+                            <div class="calendar__dates" id="dates"></div>
+                        </div>
+                        <div class="diagrama-reseña">
+                            <div class="diagrama">
+                                <div class="content-diagrama">
+                                    <h4 style="text-align: center;">Categoria mas Vendida</h4><br>
+                                    <canvas id="grafico-categoria-vendido" class="grafico-categoria-vendido"></canvas>
+                                </div>
+                                <div class="content-diagrama">
+                                    <h4 style="text-align: center;">Mes mas vendido</h4><br>
+                                    <canvas id="grafico-mes-vendido" width="100%" height="100%"></canvas>
+                                </div>
+                                <div class="content-diagrama">
+                                    <h4 style="text-align: center;">Ventas anualmente <span
+                                            class="year_actualized"></span></h4><br>
+                                    <canvas id="grafico-anual-vendido" width="100%" height="100%"></canvas>
+                                </div>
+                            </div>
+                            <div class="diagrama-botones">
+                                <button type="button" class="link-diagrama">Por Categoria</button>
+                                <button type="button" class="link-diagrama">Por Mes</button>
+                                <button type="button" class="link-diagrama">Anuelmente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contenedor-productos content-link">
+                <h2 class="text-title-page">Productos Disponibles</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="txtBuscarProductoD" name="txtBuscarProductoD" id="txtBuscarProductoD"
+                        placeholder="Buscar producto...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <button class="btn-add-producto">Agregar Producto</button>
+
+                <form class="myFormProducto" id="myFormProducto">
+                    <h2>Actualizar Producto</h2>
+                    <span class="btnCloseForm">&times;</span>
+                    <div class="group">
+                        <label for="">Producto:</label>
+                        <input type="text" name="txtNombreProd" id="txtNombreProd">
+                    </div>
+                    <div class="group">
+                        <label for="">Categoria:</label>
+                        <select name="txtCategoriaProd" id="txtCategoriaProd">
+                            <option value="" disabled selected>Escojer categoria</option>
+                            <option value="LAPTOPS">LAPTOPS</option>
+                            <option value="CELULARES">CELULARES</option>
+                            <option value="COMPUTADORAS">COMPUTADORAS</option>
+                            <option value="TABLETS">TABLETS</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <label for="">Descripcion:</label>
+                        <textarea name="txtDescripcionProd" id="txtDescripcionProd" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="group" style="display: flex;align-items: center;justify-content: space-between;">
+                        <div>
+                            <label for="">Precio:</label>
+                            <input type="text" name="txtPrecioProd" id="txtPrecioProd">
+                        </div>
+                        <div>
+                            <label for="">Stock:</label>
+                            <input type="text" name="txtStockProd" id="txtStockProd">
+                        </div>
+                    </div>
+                    <div class="group">
+                        <label for="">Imagen Referencial:</label>
+                        <input type="file" name="fileImgRefProd" id="fileImgRefProd">
+                    </div>
+                    <div style="width: 480px;height:auto;margin:auto;margin-top: 5px;text-align: center;">
+                        <img class="PrevimgRefProd">
+                    </div>
+
+                    <div class="button">
+                        <button type="submit">Actualizar</button>
+                        <!-- <button type="reset">Cancelar</button> -->
+                    </div>
+                </form>
+
+                <form class="AddmyFormProducto" id="AddmyFormProducto">
+                    <h2>Agregar un Producto Producto</h2>
+                    <span class="AddbtnCloseForm">&times;</span>
+                    <div class="group">
+                        <label for="">Producto:</label>
+                        <input type="text" name="txtAddNombreProd" id="txtAddNombreProd">
+                    </div>
+                    <div class="group">
+                        <label for="">Categoria:</label>
+                        <select name="txtAddCategoriaProd" id="txtAddCategoriaProd">
+                            <option value="" disabled selected>Escojer categoria</option>
+                            <option value="LAPTOPS">LAPTOPS</option>
+                            <option value="CELULARES">CELULARES</option>
+                            <option value="COMPUTADORAS">COMPUTADORAS</option>
+                            <option value="TABLETS">TABLETS</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <label for="">Descripcion:</label>
+                        <textarea name="txtAddDescripcionProd" id="txtAddDescripcionProd" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="group" style="display: flex;align-items: center;justify-content: space-between;">
+                        <div>
+                            <label for="">Precio:</label>
+                            <input type="text" name="txtAddPrecioProd" id="txtAddPrecioProd">
+                        </div>
+                        <div>
+                            <label for="">Stock:</label>
+                            <input type="text" name="txtAddStockProd" id="txtAddStockProd">
+                        </div>
+                    </div>
+                    <div class="group">
+                        <label for="">Imagen Referencial:</label>
+                        <input type="file" name="AddfileimgRefProd" id="fileAddimgRefProd">
+                    </div>
+                    <!-- src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPqlnoiX6erQWTy-3sTBkHgZpHb1WJB-mQ-Q&usqp=CAU"  -->
+                    <div style="width: 480px;height:auto;margin:auto;margin-top: 5px;">
+                        <img class="AddPrevimgRefProd">
+                    </div>
+                    <div class="Addbutton">
+                        <button type="submit">Aceptar</button>
+                        <button type="reset">Cancelar</button>
+                    </div>
+                </form>
+
+                <table class="table-disponibles">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>IMAGEN</th>
+                        <th>PRODUCTO</th>
+                        <th>DESCRIPCION</th>
+                        <th>PRECIO</th>
+                        <th>STOCK</th>
+                    </thead>
+                    <tbody class="table-body-disponibles"></tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-productos-agotados content-link">
+                <h2 class="text-title-page">Productos Agotados</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="PA-txtBuscarProducto" name="PA-txtBuscarProducto"
+                        id="PA-txtBuscarProducto" placeholder="Buscar producto...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <!-- <button class="btn-add-producto">Agregar Producto</button> -->
+
+                <form class="PA-myFormProducto" id="PA-myFormProducto">
+                    <h2>Actualizar Producto</h2>
+                    <span class="PA-btnCloseForm">&times;</span>
+                    <div class="PA-group">
+                        <label for="">Producto:</label>
+                        <input type="text" name="PA-txtNombreProd" id="PA-txtNombreProd">
+                    </div>
+                    <div class="PA-group">
+                        <label for="">Categoria:</label>
+                        <select name="PA-txtCategoriaProd" id="PA-txtCategoriaProd">
+                            <option value="" disabled selected>Escojer categoria</option>
+                            <option value="LAPTOPS">LAPTOPS</option>
+                            <option value="CELULARES">CELULARES</option>
+                            <option value="COMPUTADORAS">COMPUTADORAS</option>
+                            <option value="TABLETS">TABLETS</option>
+                        </select>
+                    </div>
+                    <div class="PA-group">
+                        <label for="">Descripcion:</label>
+                        <textarea name="PA-txtDescripcionProd" id="PA-txtDescripcionProd" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="PA-group" style="display: flex;align-items: center;justify-content: space-between;">
+                        <div>
+                            <label for="">Precio:</label>
+                            <input type="text" name="PA-txtPrecioProd" id="PA-txtPrecioProd">
+                        </div>
+                        <div>
+                            <label for="">Stock:</label>
+                            <input type="text" name="PA-txtStockProd" id="PA-txtStockProd">
+                        </div>
+                    </div>
+                    <div class="PA-group">
+                        <label for="">Imagen Referencial:</label>
+                        <input type="file" name="PA-fileImgRefProd" id="PA-fileImgRefProd">
+                    </div>
+                    <div style="width: 480px;height:auto;margin:auto;margin-top: 5px;text-align: center;">
+                        <img class="PA-PrevimgRefProd" name="PA-PrevimgRefProd">
+                    </div>
+
+                    <div class="PA-button">
+                        <button type="submit">Actualizar</button>
+                    </div>
+                </form>
+
+                <table class="PA-table-productos">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>IMAGEN</th>
+                        <th>PRODUCTO</th>
+                        <th>DESCRIPCION</th>
+                        <th>PRECIO</th>
+                        <th>STOCK</th>
+                    </thead>
+                    <tbody class="PA-table-body-productos"></tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-clientes content-link">
+                <h2 class="text-title-page">Clientes registrados</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="CCL-txtBuscarCliente" name="CCL-txtBuscarCliente"
+                        id="CCL-txtBuscarCliente" placeholder="Buscar Cliente...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <table class="CCL-table-clientes">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>IMAGEN</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>DNI</th>
+                        <th>CORREO</th>
+                    </thead>
+                    <tbody class="CCL-table-body-clientes"></tbody>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-empleados-vendedores content-link">
+                <h2 class="text-title-page">Empleados Vendedores</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="CEV-txtBuscarEmpleado" name="CEV-txtBuscarEmpleado"
+                        id="CEV-txtBuscarEmpleado" placeholder="Buscar Empleado...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <table class="CEV-table-empleados-vendedores">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>IMAGEN</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>CORREO</th>
+                        <th>Cargo</th>
+                    </thead>
+                    <tbody class="CEV-table-body-empleados-vendedores">
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-empleados-repartidores content-link">
+                <h2 class="text-title-page">Empleados Repartidores</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="CER-txtBuscarEmpleado" name="CER-txtBuscarEmpleado"
+                        id="CER-txtBuscarEmpleado" placeholder="Buscar Empleado...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <table class="CER-table-empleados-repartidores">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>IMAGEN</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>CORREO</th>
+                        <th>Cargo</th>
+                    </thead>
+                    <tbody class="CER-table-body-empleados-repartidores">
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-registro-empleados">
+                <form class="AddEmpleado" id="AddEmpleado">
+                    <h2>Agregar Nuevo Empleado</h2>
+                    <span class="closeForm">&times;</span>
+                    <div class="group">
+                        <div>
+                            <label for="">Nombre:</label>
+                            <input type="text" name="AE-txtNombre" id="AE-txtNombre">
+                        </div>
+                        <div>
+                            <label for="">Apellido:</label>
+                            <input type="text" name="AE-txtApellido" id="AE-txtApellido">
+                        </div>
+
+                    </div>
+                    <div class="group">
+                        <div>
+                            <label for="">Correo:</label>
+                            <input type="email" name="AE-txtCorreo" id="AE-txtCorreo">
+                        </div>
+                        <div>
+                            <label for="">Clave:</label>
+                            <input type="text" name="AE-txtClave" id="AE-txtClave">
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div>
+                            <label for="">Cargo:</label>
+                            <select name="AE-txtCargo" id="AE-txtCargo">
+                                <option value="" selected disabled>Seleccionar Categoria</option>
+                                <option value="Vendedor">Vendedor</option>
+                                <option value="Repartidor">Repartidor</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: -1px;">
+                            <label for="">DNI:</label>
+                            <input type="text" name="AE-txtDNI" id="AE-txtDNI">
+                        </div>
+                    </div>
+                    <div class="group">
+                        <input type="file" name="AE-fileImg" id="AE-fileImg" style="opacity: 1;cursor: pointer;">
+                    </div>
+                    <!-- src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPqlnoiX6erQWTy-3sTBkHgZpHb1WJB-mQ-Q&usqp=CAU"  -->
+                    <div style="width: 320px;height:320;object-fit: cover;margin:auto;margin-top: 5px;">
+                        <img class="AddPrevimgRefEmp">
+                    </div>
+                    <div class="Addbutton">
+                        <button type="submit">Aceptar</button>
+                        <button type="reset">Cancelar</button>
+                    </div>
+                </form>
+
+            </section>
+
+            <section class="contenedor-ventas content-link">
+                <h2 class="text-title-page">Ventas Realizadas</h2>
+                <div style="display: flex;align-items: center;position: relative;">
+                    <input type="text" class="CV-txtBuscarVentas" name="CV-txtBuscarVentas" id="CV-txtBuscarVentas"
+                        placeholder="Buscar Venta...">
+                    <span
+                        style="height: 32px;cursor:pointer;position: absolute;right:0;top:0;padding: 0 10px;background:blue"><i
+                            style="color: #ddd;font-size: 1.2rem;text-align: center;line-height: 32px;"
+                            class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+
+                <table class="CV-table-ventas">
+                    <thead style="background: #000;color:#fff">
+                        <th></th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>DNI</th>
+                        <th>CORREO</th>
+                        <th>FECHA</th>
+                        <th>TOTAL</th>
+                        <th>CONDICION</th>
+                    </thead>
+                    <tbody class="CV-table-body-ventas">
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="contenedor-verPerfil content-link">
+                
+                <h1 style="font-size: 1.8rem;text-align: center;">Perfil de Administrador</h1>
+
+                <div style="width:90%;margin:auto;border: thin solid red;">
+                    <form action="">
+
+                    
+                            
+                            <div style="display:flex;justify-content: space-evenly;margin: 10px">
+                                <div style="width:45%;">
+                                    <label for="txtAdminNombre">Nombre</label><br>
+                                    <input type="text" name="txtAdminNombre" id="txtAdminNombre" style="margin-top: 5px;width:100%;outline:none;border:thin solid #000;padding: 5px;">
+                                </div>
+                                <div style="width:45%;display:inline-block;">
+                                    <label for="txtAdminApellido">Apellido</label><br>
+                                    <input type="text" name="txtAdminApellido" id="txtAdminApellido" style="margin-top: 5px;width:100%;outline:none;border:thin solid #000;padding: 5px;">
+                                </div>
+                            </div>
+                            <div style="display:flex;justify-content: space-evenly;margin: 10px">
+                                <div style="width:45%;">
+                                    <label for="txtAdminCorreo">Correo</label><br>
+                                    <input type="text" name="txtAdminCorreo" id="txtAdminCorreo" style="margin-top: 5px;width:100%;outline:none;border:thin solid #000;padding: 5px;">
+                                </div>
+                                <div style="width:45%;display:inline-block">
+                                    <label for="txtAdminClave">Clave</label><br>
+                                    <input type="password" name="txtAdminClave" id="txtAdminClave" style="margin-top: 5px;width:100%;outline:none;border:thin solid #000;padding: 5px;">
+                                </div>
+                            </div>
+                    </form>
+                </div>
+
+            </section>
+        </div>
+        </section>
+    </div>
+    </div>
+
+    <script>
+        // var adminlogueadoxd = JSON.parse(sessionStorage.AdminLogeados);
+        // console.log(adminlogueadoxd);
+        var c_admin_ventas = 20;
+        const a_ventas_registradas = [
+            {
+                ID_USER: 1,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 1, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 2, imagen: "https://bit.ly/3plUgDj" },
+                    // { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 1, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                    // { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 1, imagen: "https://bit.ly/3sqENUo" }
+                ],
+                TOTAL: 22000,
+                FECHA: "2021/10/20",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+            {
+                ID_USER: 2,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 6, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 7, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 1, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 44000,
+                FECHA: "2021/10/20",
+                CONDICION: "Completada",
+                CIUDAD: "La Libertad"
+            },
+            {
+                ID_USER: 1,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 8, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                ],
+                TOTAL: 50000,
+                FECHA: "2021/11/14",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+            {
+                ID_USER: 7,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 9, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 9, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 9, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 4, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 60000,
+                FECHA: "2021/10/20",
+                CONDICION: "Completada",
+                CIUDAD: "Cusco"
+            },
+            {
+                ID_USER: 7,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 5, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 5, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 1, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantiddad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 15000,
+                FECHA: "2021/10/29",
+                CONDICION: "Completada",
+                CIUDAD: "Cusco"
+            },
+            {
+                ID_USER: 1,
+                PRODUCTOS_CARRITO: [
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 2, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 10, imagen: "https://bit.ly/3tfP58V" },
+                ],
+                TOTAL: 70000,
+                FECHA: "2021/11/29",
+                CONDICION: "Completada",
+                CIUDAD: "La Libertad"
+
+            },
+            {
+                ID_USER: 8,
+                PRODUCTOS_CARRITO: [
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 15, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 45000,
+                FECHA: "2022/01/15",
+                CONDICION: "Completada",
+                CIUDAD: "Arequipa"
+            },
+            {
+                ID_USER: 3,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 7, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 5, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 2, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 79000,
+                FECHA: "2022/01/01",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+            {
+                ID_USER: 1,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 9, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                ],
+                TOTAL: 99000,
+                FECHA: "2022/01/01",
+                CONDICION: "Completada",
+                CIUDAD: "Cusco"
+            },
+            {
+                ID_USER: 3,
+                PRODUCTOS_CARRITO: [
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 25, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                ],
+                TOTAL: 44000,
+                FECHA: "2022/01/01",
+                CONDICION: "Completada",
+                CIUDAD: "Arequipa"
+            },
+            {
+                ID_USER: 2,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 2, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 2, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 2, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 30000,
+                FECHA: "2022/01/05",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+            {
+                ID_USER: 3,
+                PRODUCTOS_CARRITO: [
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 8, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 2, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 40000,
+                FECHA: "2022/01/05",
+                CONDICION: "Completada",
+                CIUDAD: "La Libertad"
+            },
+            {
+                ID_USER: 2,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 3, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 3, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 3, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 3, imagen: "https://bit.ly/3tfP58V" },
+                ],
+                TOTAL: 35000,
+                FECHA: "2022/01/08",
+                CONDICION: "Completada",
+                CIUDAD: "Arequipa"
+            },
+            {
+                ID_USER: 1,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 4, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 1, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 13000,
+                FECHA: "2022/01/08",
+                CONDICION: "Completada",
+                CIUDAD: "Lambayeque"
+            },
+            {
+                ID_USER: 7,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 12, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 5, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 96000,
+                FECHA: "2022/02/10",
+                CONDICION: "Completada",
+                CIUDAD: "Lambayeque"
+            },
+            {
+                ID_USER: 6,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 4, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 12, marca: "SAMSUNG", categoria: "CELULARES", precio: 1200, cantidad: 1, imagen: "https://bit.ly/3plUgDj" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                ],
+                TOTAL: 48000,
+                FECHA: "2022/02/14",
+                CONDICION: "Completada",
+                CIUDAD: "Lambayeque"
+            },
+            {
+                ID_USER: 8,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 9, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 9, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 5, imagen: "https://bit.ly/3sVO3ig" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 5, imagen: "https://bit.ly/3tfP58V" },
+                ],
+                TOTAL: 96000,
+                FECHA: "2022/02/14",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+            {
+                ID_USER: 6,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 5, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 42, marca: "SAMSUNG", categoria: "COMPUTADORAS", precio: 5600, cantidad: 8, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 7, marca: "APPLE", categoria: "COMPUTADORAS", precio: 3500, cantidad: 8, imagen: "https://bit.ly/3tfP58V" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" }
+                ],
+                TOTAL: 74000,
+                FECHA: "2022/03/14",
+                CONDICION: "Completada",
+                CIUDAD: "Ica"
+            },
+            {
+                ID_USER: 2,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 3, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 4, marca: "ALL IN ONEONE", categoria: "COMPUTADORAS", precio: 10000, cantidad: 2, imagen: "https://bit.ly/3sVO3ig" },
+                ],
+                TOTAL: 10000,
+                FECHA: "2022/03/17",
+                CONDICION: "Completada",
+                CIUDAD: "Ica"
+            },
+            {
+                ID_USER: 3,
+                PRODUCTOS_CARRITO: [
+                    { ID: 47, marca: "LG", categoria: "COMPUTADORAS", precio: 4500, cantidad: 1, imagen: "https://bit.ly/3K0v7Wx" },
+                    { ID: 6, marca: "SAMSUNG", categoria: "TABLETS", precio: 1640, cantidad: 1, imagen: "https://bit.ly/3tiOIe5" },
+                    { ID: 10, marca: "LENOVO", categoria: "LAPTOPS", precio: 3010, cantidad: 1, imagen: "https://bit.ly/3hlhgOv" },
+                    { ID: 14, marca: "XIAOMI", categoria: "CELULARES", precio: 1100, cantidad: 2, imagen: "https://bit.ly/3sqENUo" }
+                ],
+                TOTAL: 8000,
+                FECHA: "2022/03/19",
+                CONDICION: "Completada",
+                CIUDAD: "Lima"
+            },
+        ];
+
+        var c_admin_empleados = 30;
+        var empl_img_default = "../../IMG/userlogin.png";
+        const a_empleados_registrados = [
+            {
+                ID: 1,
+                nombre: "Paulo",
+                apellido: "Alvarez",
+                correo: "pauloAlvarez@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 2,
+                nombre: "German",
+                apellido: "Diaz",
+                correo: "germanD@gmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 3,
+                nombre: "Fabian",
+                apellido: "Rodriguez",
+                correo: "fabianR@outlook.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 4,
+                nombre: "Victor",
+                apellido: "Lopez",
+                correo: "victorL@outlook.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 5,
+                nombre: "Rebeca",
+                apellido: "Medreiros",
+                correo: "rebecaM@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 6,
+                nombre: "Marcos",
+                apellido: "Galindez",
+                correo: "marcosG@hotmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 7,
+                nombre: "Carlos",
+                apellido: "Vasquez",
+                correo: "carlosV@gmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 8,
+                nombre: "Dayana",
+                apellido: "Lora",
+                correo: "dayanaL@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 9,
+                nombre: "Paul",
+                apellido: "Hernandez",
+                correo: "paulH@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 10,
+                nombre: "Fiorella",
+                apellido: "Menacho",
+                correo: "fiorellaM@outlook.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 11,
+                nombre: "Dayana",
+                apellido: "Diaz",
+                correo: "dayana_diaz@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 12,
+                nombre: "Leonardo",
+                apellido: "Lopez",
+                correo: "leonardoLopez@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 13,
+                nombre: "Guillermo",
+                apellido: "Noruega",
+                correo: "guillermo_noruega@outlook.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 14,
+                nombre: "Fiorella",
+                apellido: "Jimenez",
+                correo: "fiorellaJimenez_202@hotmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 15,
+                nombre: "Leonardo",
+                apellido: "Balladares",
+                correo: "leonardo_balladares@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 16,
+                nombre: "Ricardo",
+                apellido: "Noruega",
+                correo: "ricardoNor_01@outlook.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 17,
+                nombre: "Maria",
+                apellido: "Flores",
+                correo: "maria_flores@hotmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 18,
+                nombre: "Bruno",
+                apellido: "Penal",
+                correo: "brunoPenal@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 19,
+                nombre: "Guillermo",
+                apellido: "Diaz",
+                correo: "guillermoDiaz@outlook.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 20,
+                nombre: "Fabiana",
+                apellido: "Peralta",
+                correo: "fabiana_peralta_300@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 21,
+                nombre: "Nain",
+                apellido: "Lozzio",
+                correo: "nain_lozzio@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 22,
+                nombre: "Milagros",
+                apellido: "Alcala",
+                correo: "milagros_alcala_@outlook.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 23,
+                nombre: "Paolo",
+                apellido: "Fernandez",
+                correo: "paoloFernandez@hotmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 24,
+                nombre: "Franchesco",
+                apellido: "Belaunde",
+                correo: "franchesco_belaunde@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 25,
+                nombre: "Sebastian",
+                apellido: "Rodriguez",
+                correo: "sebasRodrigues_@outlook.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 26,
+                nombre: "Victor",
+                apellido: "Canepa",
+                correo: "victor_canepa_202@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 27,
+                nombre: "Augusto",
+                apellido: "Lopez",
+                correo: "augustoLopez_@gmail.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 28,
+                nombre: "Frachesca",
+                apellido: "Pacheco",
+                correo: "franchescaPacheco101@outlook.com",
+                clave: "123",
+                cargo: "Vendedor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 29,
+                nombre: "Nicolle",
+                apellido: "Arreaga",
+                correo: "nicolleArreaga_201@hotmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            },
+            {
+                ID: 30,
+                nombre: "Jose",
+                apellido: "Hernandez",
+                correo: "joseHernandez@gmail.com",
+                clave: "123",
+                cargo: "Repartidor",
+                DNI: "39405886",
+                IMGperfil: empl_img_default
+            }
+        ]
+
+        var c_product_disponibles = 48;
+        const a_products_disponibles = [
+            {
+                ID: 1,
+                marca: "LG",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. ODIT, TOTAM.",
+                precio: 3600,
+                stock: 20,
+                imagen: "https://bit.ly/3I8ENh2",
+            },
+            {
+                ID: 2,
+                marca: "LENOVO",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4000,
+                stock: 35,
+                imagen: "https://bit.ly/3rVIWzB",
+            },
+            {
+                ID: 3,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1340,
+                stock: 50,
+                imagen: "https://bit.ly/3rUw6kY",
+            },
+            {
+                ID: 4,
+                marca: "ALL IN ONEONE",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 10000,
+                stock: 1400,
+                imagen: "https://bit.ly/3sVO3ig",
+            },
+            {
+                ID: 5,
+                marca: "NOKIA",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2300,
+                stock: 100,
+                imagen: "https://bit.ly/3sqENUo",
+            },
+            {
+                ID: 6,
+                marca: "SAMSUNG",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1640,
+                stock: 55,
+                imagen: "https://bit.ly/3tiOIe5",
+            },
+            {
+                ID: 7,
+                marca: "APPLE",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3500,
+                stock: 120,
+                imagen: "https://bit.ly/3tfP58V",
+            },
+            {
+                ID: 8,
+                marca: "ONEPLUS",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1900,
+                stock: 38,
+                imagen: "https://bit.ly/3tdd3BU",
+            },
+            {
+                ID: 9,
+                marca: "SAMSUNG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1420,
+                stock: 400,
+                imagen: "https://bit.ly/3hr4PAF",
+            },
+            {
+                ID: 10,
+                marca: "LENOVO",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3010,
+                stock: 200,
+                imagen: "https://bit.ly/3hlhgOv",
+            },
+            {
+                ID: 11,
+                marca: "DELL",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4000,
+                stock: 120,
+                imagen: "https://bit.ly/3BXGpIh",
+            },
+            {
+                ID: 12,
+                marca: "SAMSUNG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1200,
+                stock: 400,
+                imagen: "https://bit.ly/3plUgDj",
+            },
+            {
+                ID: 13,
+                marca: "LG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 5200,
+                stock: 100,
+                imagen: "https://bit.ly/3K0v7Wx",
+            },
+            {
+                ID: 14,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1100,
+                stock: 350,
+                imagen: "https://bit.ly/3sqENUo",
+            },
+            {
+                ID: 15,
+                marca: "ASUS",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4600,
+                stock: 210,
+                imagen: "https://bit.ly/3hlhgOv",
+            },
+            {
+                ID: 16,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 980,
+                stock: 400,
+                imagen: "https://bit.ly/3plUgDj",
+            },
+            {
+                ID: 17,
+                marca: "ASUS",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2900,
+                stock: 500,
+                imagen: "https://bit.ly/36Oyjq7",
+            },
+            {
+                ID: 18,
+                marca: "LG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 900,
+                stock: 190,
+                imagen: "https://bit.ly/33W6x9V",
+            },
+            {
+                ID: 19,
+                marca: "ASUS",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3400,
+                stock: 130,
+                imagen: "https://bit.ly/36GhOMx",
+            },
+            {
+                ID: 20,
+                marca: "TOSHIBA",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2100,
+                stock: 200,
+                imagen: "https://bit.ly/3tfSIvO",
+            },
+            {
+                ID: 21,
+                marca: "MOTOROLA",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1000,
+                stock: 320,
+                imagen: "https://bit.ly/3K0otzx",
+            },
+            {
+                ID: 22,
+                marca: "DELL",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3000,
+                stock: 400,
+                imagen: "https://bit.ly/3JYeiM3",
+            },
+            {
+                ID: 23,
+                marca: "LG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1000,
+                stock: 200,
+                imagen: "https://bit.ly/3K0otzx",
+            },
+            {
+                ID: 24,
+                marca: "TOSHIBA",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3000,
+                stock: 100,
+                imagen: "https://bit.ly/3sqDLI0",
+            },
+            {
+                ID: 25,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1100,
+                stock: 140,
+                imagen: "https://bit.ly/33W6x9V",
+            },
+            {
+                ID: 26,
+                marca: "MOTOROLA",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1000,
+                stock: 200,
+                imagen: "https://bit.ly/3pnSxx9",
+            },
+            {
+                ID: 27,
+                marca: "MOTOROLA",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 900,
+                stock: 140,
+                imagen: "https://bit.ly/33W6x9V",
+            },
+            {
+                ID: 28,
+                marca: "HUAWEI",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2100,
+                stock: 140,
+                imagen: "https://bit.ly/3st5gRo",
+            },
+            {
+                ID: 29,
+                marca: "LG",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2100,
+                stock: 200,
+                imagen: "https://bit.ly/3tfPhVH",
+            },
+            {
+                ID: 30,
+                marca: "TOSHIBA",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1890,
+                stock: 400,
+                imagen: "https://bit.ly/3HretxL",
+            },
+            {
+                ID: 31,
+                marca: "LG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1000,
+                stock: 400,
+                imagen: "https://bit.ly/3pnSxx9",
+            },
+            {
+                ID: 32,
+                marca: "DELL",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4200,
+                stock: 100,
+                imagen: "https://bit.ly/3hlhgOv",
+            },
+            {
+                ID: 33,
+                marca: "HUAWEI",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1500,
+                stock: 200,
+                imagen: "https://bit.ly/3Mbm0V8",
+            },
+            {
+                ID: 34,
+                marca: "DELL",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 2600,
+                stock: 300,
+                imagen: "https://bit.ly/3BXyLxG",
+            },
+            {
+                ID: 35,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 980,
+                stock: 600,
+                imagen: "https://bit.ly/3plUgDj",
+            },
+            {
+                ID: 36,
+                marca: "LG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4700,
+                stock: 290,
+                imagen: "https://bit.ly/3K0v7Wx",
+            },
+            {
+                ID: 37,
+                marca: "LG",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1200,
+                stock: 300,
+                imagen: "https://bit.ly/3tiOIe5",
+            },
+            {
+                ID: 38,
+                marca: "SAMSUNG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4300,
+                stock: 150,
+                imagen: "https://bit.ly/3tfP58V",
+            },
+            {
+                ID: 39,
+                marca: "DELL",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3600,
+                stock: 110,
+                imagen: "https://bit.ly/3tfSIvO",
+            },
+            {
+                ID: 40,
+                marca: "LG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4000,
+                stock: 240,
+                imagen: "https://bit.ly/3hlhgOv",
+            },
+            {
+                ID: 41,
+                marca: "MOTOROLA",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 890,
+                stock: 400,
+                imagen: "https://bit.ly/3teG7sF",
+            },
+            {
+                ID: 42,
+                marca: "SAMSUNG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 5600,
+                stock: 100,
+                imagen: "https://bit.ly/3tfP58V",
+            },
+            {
+                ID: 43,
+                marca: "XIAOMI",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1400,
+                stock: 120,
+                imagen: "https://bit.ly/3tdd3BU",
+            },
+            {
+                ID: 44,
+                marca: "DELL",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 5900,
+                stock: 160,
+                imagen: "https://bit.ly/33W6meL",
+            },
+            {
+                ID: 45,
+                marca: "LG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 900,
+                stock: 430,
+                imagen: "https://bit.ly/3teG7sF",
+            },
+            {
+                ID: 46,
+                marca: "TOSHIBA",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3000,
+                stock: 120,
+                imagen: "https://bit.ly/3JYeiM3",
+            },
+            {
+                ID: 47,
+                marca: "LG",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4500,
+                stock: 300,
+                imagen: "https://bit.ly/3K0v7Wx",
+            },
+            {
+                ID: 48,
+                marca: "LG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1000,
+                stock: 300,
+                imagen: "https://bit.ly/3hlhgOv",
+            },
+        ];
+
+        var c_product_agotados = 10;
+        const a_products_agotados = [
+            {
+                ID: 1,
+                marca: "SAMSUNG",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. ODIT, TOTAM.",
+                precio: 2300,
+                stock: 0,
+                imagen: "https://bit.ly/3LIXI4B"
+            },
+            {
+                ID: 2,
+                marca: "HUAWEI",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1690,
+                stock: 0,
+                imagen: "https://bit.ly/34N6qy9"
+            },
+            {
+                ID: 3,
+                marca: "XIAOMI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1340,
+                stock: 0,
+                imagen: "https://bit.ly/3GYTd24"
+            },
+            {
+                ID: 4,
+                marca: "ALL IN ONEONE",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 4000,
+                stock: 0,
+                imagen: "https://bit.ly/3s2k0Gn"
+            },
+            {
+                ID: 5,
+                marca: "DELL",
+                categoria: "COMPUTADORAS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 5000,
+                stock: 0,
+                imagen: "https://bit.ly/3plR0Yv"
+            },
+            {
+                ID: 6,
+                marca: "HUAWEI",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1200,
+                stock: 0,
+                imagen: "https://bit.ly/3hjR6LU"
+            },
+            {
+                ID: 7,
+                marca: "ASUS",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3600,
+                stock: 0,
+                imagen: "https://bit.ly/3LWBmfQ"
+            },
+            {
+                ID: 8,
+                marca: "SAMSUNG",
+                categoria: "CELULARES",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 1450,
+                stock: 0,
+                imagen: "https://bit.ly/3hkJnxa"
+            },
+            {
+                ID: 9,
+                marca: "LENOVO",
+                categoria: "TABLETS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3200,
+                stock: 0,
+                imagen: "https://bit.ly/36xMQGm"
+            },
+            {
+                ID: 10,
+                marca: "XIAOMI",
+                categoria: "LAPTOPS",
+                descripcion: "LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT. OMNIS NEQUE NUMQUAM DESERUNT REM SEQUI DELENITI POSSIMUS LIBERO VOLUPTATES ODIT DIGNISSIMOS.",
+                precio: 3100,
+                stock: 0,
+                imagen: "https://bit.ly/3HqITjw"
+            }
+        ];
+
+        var user_img_default = "../../IMG/userlogin.png";
+        const a_usuarios_registrados = [
+            {
+                ID: 1,
+                nombre: "Antonio",
+                apellido: "Jimnenez",
+                correo: "antonioJ@gmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 2,
+                nombre: "German",
+                apellido: "Diaz",
+                correo: "germanD@gmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 3,
+                nombre: "Fabian",
+                apellido: "Rodriguez",
+                correo: "fabianR@outlook.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 4,
+                nombre: "Victor",
+                apellido: "Lopez",
+                correo: "victorL@outlook.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 5,
+                nombre: "Rebeca",
+                apellido: "Medreiros",
+                correo: "rebecaM@hotmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 6,
+                nombre: "Marcos",
+                apellido: "Galindez",
+                correo: "marcosG@hotmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 7,
+                nombre: "Carlos",
+                apellido: "Vasquez",
+                correo: "carlosV@gmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 8,
+                nombre: "Dayana",
+                apellido: "Lora",
+                correo: "dayanaL@hotmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 9,
+                nombre: "Paul",
+                apellido: "Hernandez",
+                correo: "paulH@gmail.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            },
+            {
+                ID: 10,
+                nombre: "Fiorella",
+                apellido: "Menacho",
+                correo: "fiorellaM@outlook.com",
+                clave: "123",
+                DNI: "18273959",
+                IMGperfil: user_img_default
+            }
+        ];
+
+        var admin_products_disponibles;
+        var admin_products_agotados;
+        var admin_empleados_registrados;
+        var admin_ventas_registrados;
+        var admin_usuarios_registrados;
+        // console.log(a_usuarios_registrados);
+
+        // if (localStorage.admin_pd == null) { localStorage.admin_pd = JSON.stringify(a_products_disponibles); }
+        // if (localStorage.admin_pa == null) { localStorage.admin_pa = JSON.stringify(a_products_agotados); }
+        // if (localStorage.admin_usuarios == null){ localStorage.admin_usuarios = JSON.stringify(a_usuarios_registrados); }
+
+        addValores = () => {
+            if (localStorage.admin_pd == null) { localStorage.admin_pd = JSON.stringify(a_products_disponibles); }
+            if (localStorage.admin_pa == null) { localStorage.admin_pa = JSON.stringify(a_products_agotados); }
+            if (localStorage.admin_usuarios == null) { localStorage.admin_usuarios = JSON.stringify(a_usuarios_registrados); }
+
+            if (localStorage.admin_pd != null) { admin_products_disponibles = JSON.parse(localStorage.admin_pd); }
+            if (localStorage.admin_pa != null) { admin_products_agotados = JSON.parse(localStorage.admin_pa); }
+            if (localStorage.admin_usuarios != null) { admin_usuarios_registrados = JSON.parse(localStorage.admin_usuarios); }
+            if (localStorage.admin_ventas != null) { admin_ventas_registrados = JSON.parse(localStorage.admin_ventas); }
+        }
+
+        localStorage.admin_pd = JSON.stringify(a_products_disponibles);
+        localStorage.admin_pa = JSON.stringify(a_products_agotados);
+        localStorage.admin_usuarios = JSON.stringify(a_usuarios_registrados);
+        localStorage.admin_empleados = JSON.stringify(a_empleados_registrados);
+        localStorage.admin_ventas = JSON.stringify(a_ventas_registradas);
+        // console.log(localStorage.admin_pd);
+
+        // admin_ventas_registrados = JSON.parse(localStorage.admin_ventas)
+        // console.log(admin_ventas_registrados);
+        // console.log(localStorage.admin_ventas);
+        // MOSTRAR DROPDOWN
+        showHideDropDown = () => {
+            var linkDrop = document.querySelectorAll(".link-drop");
+            var dropDown = document.querySelectorAll(".dropdown");
+            linkDrop.forEach((posicion, i) => {
+                linkDrop[i].onclick = () => {
+                    dropDown[i].style.display = (dropDown[i].style.display == "none") ? "block" : "none";
+                }
+                dropDown[i].style.display = "none";
+            })
+        }
+
+        // BARS HIDE/SHOW NAV
+        showHideNav = () => {
+            document.querySelector(".bar-group").onclick = () => {
+                let liNav = document.querySelectorAll(".li-nav");
+                let textDrop = document.querySelectorAll(".text-drop");
+                let textPerutec = document.querySelector(".contenedor-nav .group");
+                let contenedorNav = document.querySelector(".contenedor-nav");
+                let contenedorContent = document.querySelector(".contenedor-content");
+
+                contenedorNav.classList.toggle("contenedor-nav-100");
+                contenedorContent.classList.toggle("marginLeft-100");
+
+                liNav.forEach((posicion, i) => {
+                    // ICON 1 LI-NAV
+                    // liNav[i].children[0])
+                    // TEXTO LI-NAV
+                    liNav[i].children[1].classList.toggle("text-none-100");
+                })
+
+                textDrop.forEach((posicion, i) => {
+                    // TEXTO DENTRO DEL DROP
+                    textDrop[i].classList.toggle("text-size-100");
+                })
+
+                // ICON PERUTEC
+                // textPerutec.children[0]
+                // TEXTO PERUTEC
+                textPerutec.children[1].classList.toggle("text-none-100");
+            }
+        }
+
+        // DASHBOARD
+        AdminDashboard = () => {
+            let txtbienvenida = document.querySelector(".group-welcome-text");
+            JSON.parse(sessionStorage.AdminLogeados).forEach(e => txtbienvenida.innerHTML = `<b>Bienvenido</b>,&nbspAdministrador: ${e.nombre} ${e.apellido}</span>`)
+            // document.querySelector("#count_ventas_realizadas").textContent = counter_ventas;
+            document.querySelector("#count_ventas_realizadas").textContent = 100;
+            document.querySelector("#count_ventas_espera").textContent = 15;
+            document.querySelector("#count_usuarios_registrados").textContent = counter_usuarios;
+            document.querySelector("#categoria_mas_vendida").textContent = "Computadoras"
+
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            var c_celulares = 0;
+            var c_computadoras = 0;
+            var c_laptops = 0;
+            var c_tablets = 0;
+            var c_january = 0;
+            var c_february = 0;
+            var c_march = 0;
+            var c_april = 0;
+            var c_may = 0;
+            var c_june = 0;
+            var c_july = 0;
+            var c_august = 0;
+            var c_september = 0;
+            var c_october = 0;
+            var c_november = 0;
+            var c_december = 0;
+
+
+            a_ventas_registradas.forEach((posicion, i) => {
+                let productos_carrito = a_ventas_registradas[i].PRODUCTOS_CARRITO;
+                productos_carrito.forEach((posicion, i) => {
+                    switch (productos_carrito[i].categoria) {
+                        case "CELULARES": c_celulares++; break;
+                        case "COMPUTADORAS": c_computadoras++; break;
+                        case "LAPTOPS": c_laptops++; break;
+                        case "TABLETS": c_tablets++; break;
+                    }
+                });
+
+
+                let fecha = new Date(a_ventas_registradas[i].FECHA);
+                switch (monthNames[fecha.getMonth()]) {
+                    case "January": c_january++; break;
+                    case "February": c_february++; break;
+                    case "March": c_march++; break;
+                    case "April": c_april++; break;
+                    case "May": c_may++; break;
+                    case "June": c_june++; break;
+                    case "July": c_july++; break;
+                    case "August": c_august++; break;
+                    case "September": c_september++; break;
+                    case "October": c_october++; break;
+                    case "November": c_november++; break;
+                    case "December": c_december++; break;
+                }
+
+            })
+
+            tablesDashboard = () => {
+                tablestock = () => {
+                    let tbody_stock = document.querySelector(".tbody-stock-dashboard");
+
+                    let prod_agotados = JSON.parse(localStorage.admin_pa);
+                    prod_agotados.forEach((posicion, i) => {
+                        let textAgotado = (prod_agotados[i].stock == 0) ? "Agotado" : "0";
+                        let today = new Date();
+                        tbody_stock.innerHTML += `
+                            <tr>
+                                <td>${prod_agotados[i].ID}</td>
+                                <td>
+                                    <div style="width:60px;margin:auto;overflow:hidden;font-size:.8rem;text-overflow:ellipsis;white-space:nowrap">${prod_agotados[i].marca.toLowerCase()}</div>
+                                </td>
+                                <td>S/${prod_agotados[i].precio}</td>
+                                <td>${today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear()}</td>
+                                <td>${textAgotado}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                tablestock();
+
+                tablemoreVendido = () => {
+                    let tbody_vendidos = document.querySelector(".tbody-more-dashboard");
+
+                    let ventas_realizadas = JSON.parse(localStorage.admin_ventas);
+                    let ultimas_ventas = ventas_realizadas.slice(ventas_realizadas.length - 10, ventas_realizadas.length + 1).reverse();
+                    
+                    ultimas_ventas.forEach((posicion, i) => {
+                        tbody_vendidos.innerHTML += `
+                            <tr>
+                                <td>${posicion.FECHA}</td>
+                                <td>S/${posicion.TOTAL}</td>
+                                <td>${posicion.CIUDAD}</td>
+                                <td>${posicion.CONDICION}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                tablemoreVendido();
+
+            }
+            tablesDashboard();
+
+            calendarDashboard = () => {
+                let currentDate = new Date();
+                let currentDay = currentDate.getDate();
+                let monthNumber = currentDate.getMonth();
+                let currentYear = currentDate.getFullYear();
+
+                let dates = document.querySelector("#dates");
+                let month = document.querySelector("#month");
+                let year = document.querySelector("#year");
+
+                let prev = document.querySelector("#prev-month");
+                let next = document.querySelector("#next-month");
+
+                month.textContent = monthNames[monthNumber];
+                year.textContent = currentYear.toString();
+
+                prev.onclick = () => { lastMonth(); }
+                next.onclick = () => { nextMonth(); }
+
+                // ESCRIBIR LOS MESES
+                function writeMonth(month) {
+
+                    for (let i = startDay(); i > 0; i--) {
+                        dates.innerHTML += `<div class="calendar__date calendar__item calendar__last-days">
+                            ${getTotalDays(monthNumber - 1) - (i - 1)}
+                        </div>`;
+                    }
+
+                    for (let i = 1; i <= getTotalDays(month); i++) {
+                        if (i === currentDay) {
+                            // activeDay();
+                            dates.innerHTML += `<div class="calendar__date calendar__item calendar__days-hover">${i}</div>`;
+                        }
+                        else {
+                            dates.innerHTML += `<div class="calendar__date calendar__item calendar__days-hover">${i}</div>`;
+                        }
+                    }
+                    activeDay();
+                    var lastDays = document.querySelectorAll(".calendar__last-days");
+                    lastDays.forEach((posicion, i) => {
+                        lastDays[i].onclick = () => {
+                            activeDay();
+                            lastMonth();
+
+                        }
+                    })
+                }
+
+                writeMonth(monthNumber);
+
+                // TOTAL DE DIAS QUE TIENE QUE ESCRIBIR
+                function getTotalDays(month) {
+                    if (month === -1) { month = 11 };
+
+                    if (month == 0 ||
+                        month == 2 ||
+                        month == 4 ||
+                        month == 6 ||
+                        month == 7 ||
+                        month == 9 ||
+                        month == 11) {
+                        return 31;
+                    }
+                    else if (month == 3 ||
+                        month == 5 ||
+                        month == 8 ||
+                        month == 10) {
+                        return 30;
+                    }
+                    else {
+                        return isLeap() ? 29 : 28;
+                    }
+                }
+
+                // SABER SI EL AÑO ES BICIESTO O NO
+                function isLeap() {
+                    return ((currentYear % 100 !== 0) && (currentYear % 4 === 0) || (currentYear % 400 === 0));
+                }
+
+                // SABER EL DIA EN EL QUE EMPIEZA LA SEMANA
+                function startDay() {
+                    // CREAR UNA NUEVA FECHA PARA SABER QUE DIA CAE EL DIA 1 DEL MES
+                    let start = new Date(currentYear, monthNumber, 1);
+                    return ((start.getDay() - 1) === -1) ? 6 : start.getDay() - 1;
+                }
+
+                // SE ENCARGA DE ESCRIBIR EL MES ANTERIOR
+                function lastMonth() {
+                    if (monthNumber !== 0) {
+                        monthNumber--;
+                    } else {
+                        monthNumber = 11;
+                        currentYear--;
+                    }
+                    setNewDate();
+                }
+
+                // SE ENCARGA DE ESCRIBIR EL MES SIGUIENTE
+                function nextMonth() {
+                    if (monthNumber !== 11) {
+                        monthNumber++;
+                    } else {
+                        monthNumber = 0;
+                        currentYear++;
+                    }
+                    setNewDate();
+                }
+
+                // ESTABLECE LA NUEVA FECHA CUANDO SE MUEVA EL CALENDARIO
+                function setNewDate() {
+                    currentDate.setFullYear(currentYear, monthNumber, currentDay);
+                    month.textContent = monthNames[monthNumber];
+                    year.textContent = currentYear.toString();
+                    dates.textContent = ``;
+                    writeMonth(monthNumber);
+                }
+
+                function activeDay() {
+                    let numberDays = document.querySelectorAll(".calendar__days-hover");
+
+                    numberDays.forEach((position, i) => {
+                        numberDays[i].onclick = () => {
+                            let mes = document.querySelector("#month");
+                            let anio = document.querySelector("#year");
+                            // console.log(numberDays[i].textContent+"/"+(monthNumber+1)+"/"+anio.textContent);
+                            // console.log(numberDays[i].textContent + "/" + (mes.textContent) + "/" + anio.textContent);
+                            numberDays.forEach((posicion, i) => {
+                                numberDays[i].classList.remove("calendar__day-active")
+                            })
+                            numberDays[i].classList.add("calendar__day-active");
+                        }
+                        if (numberDays[i].textContent == currentDay) {
+                            numberDays[i].classList.add("calendar__day-active");
+                        }
+                    })
+                }
+            }
+            calendarDashboard();
+
+            graficosDashboard = () => {
+                graficosDisplay = () => {
+                    var contentDiagram = document.querySelectorAll(".content-diagrama");
+                    var linkDiagram = document.querySelectorAll(".link-diagrama");
+
+                    linkDiagram.forEach((position, i) => {
+                        contentDiagram[0].style.display = "block";
+                        linkDiagram[i].onclick = () => {
+                            linkDiagram.forEach((position, i) => {
+                                contentDiagram[i].style.display = "none";
+                            })
+                            contentDiagram[i].style.display = "block";
+                        }
+                        contentDiagram[i].style.display = "none";
+                    })
+                }
+                graficosDisplay();
+
+                graficosShow = () => {
+
+
+                    categoriaGrafico = () => {
+                        let grafico = document.getElementById("grafico-categoria-vendido").getContext('2d');
+                        let dataCount = [c_celulares, c_computadoras, c_laptops, c_tablets];
+                        const data = {
+                            labels: ['Celulares', 'Computadoras', 'Laptops', 'Tablets'],
+                            datasets: [{
+                                // label: 'My First Dataset',
+                                data: dataCount,
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(0, 255, 0)'],
+                                hoverOffset: 7
+                            }]
+                        };
+                        const myChart = new Chart(grafico, {
+                            type: 'pie',
+                            data: data
+                        });
+                    }
+                    categoriaGrafico();
+
+                    let daysActive = document.querySelectorAll(".calendar__days-hover");
+                    daysActive.forEach((posicion, i) => {
+                        // console.log(daysActive[i].textContent);
+                    })
+                    mesGrafico = () => {
+                        let grafico = document.getElementById("grafico-mes-vendido").getContext('2d');
+                        // const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+                        const data = {
+                            labels: monthNames,
+                            datasets: [{
+                                label: 'Ventas Anuales',
+                                data: [1000, 2000, 4005, 6000, 3000, 2000, 9000, 1000, 1000, 7000, 5000, 4000],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(201, 203, 207, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 159, 64)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(201, 203, 207)'
+                                ],
+                                borderWidth: 1
+                            }],
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            },
+                        };
+
+                        const myChart = new Chart(grafico, {
+                            type: 'bar',
+                            data: data,
+                        });
+                    }
+                    mesGrafico();
+
+                    anioGrafico = () => {
+                        let yerar_actual = document.querySelector("#year").textContent;
+                        document.querySelector(".year_actualized").textContent = yerar_actual
+                        let grafico = document.getElementById("grafico-anual-vendido").getContext('2d');
+                        // const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+                        const data = {
+                            labels: monthNames,
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [650, 590, 800, 810, 560, 550, 400, 650, 590, 800, 810, 560, 550, 400],
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        };
+
+                        const myChart = new Chart(grafico, {
+                            type: 'line',
+                            data: data,
+                        });
+                    }
+                    anioGrafico();
+
+
+                }
+                graficosShow();
+            }
+            graficosDashboard();
+        }
+        
+        // PRODUCTOS
+        AdminProductos = () => {
+            ///////////////////////////////////////////  PRODUCTOS DISPONIBLES  ///////////////////////////////////////////
+            AvailableProducts = () => {
+                var tableBodyDisponibles = document.querySelector(".table-body-disponibles");
+                var formProd = document.forms["myFormProducto"];
+                var AddFormProd = document.querySelector(".AddmyFormProducto");
+                var updatePrevImg = document.querySelector(".PrevimgRefProd");
+                var fileUpdateImg = document.querySelector("#fileImgRefProd");
+                var btnCerrarForm = document.querySelector(".btnCloseForm");
+                var indexPosicion;
+
+                // EDITAR PRODUCTO
+                btnEditProduct = () => {
+                    let btnEditProducto = document.querySelectorAll(".btnEditarProducto");
+
+                    btnEditProducto.forEach((posicion, i) => {
+                        btnEditProducto[i].onclick = () => {
+                            AddFormProd.style.display = "none";
+                            window.scrollTo({ top: 150, behavior: 'smooth' });
+
+                            var rowFila = btnEditProducto[i].parentElement.parentElement;
+                            var idTable = parseInt(rowFila.children[6].innerHTML);
+
+                            let Eid;
+                            let Ecategoria;
+                            let Edescripcion;
+                            let Eimg;
+                            let Emarca;
+                            let Eprecio;
+                            let Estock;
+
+                            admin_products_disponibles.forEach((e) => {
+                                if (idTable == e.ID) {
+                                    indexPosicion = admin_products_disponibles.indexOf(e);
+                                    Eid = e.ID;
+                                    Emarca = e.marca;
+                                    Ecategoria = e.categoria;
+                                    Edescripcion = e.descripcion;
+                                    Eprecio = e.precio;
+                                    Estock = e.stock;
+                                    Eimg = e.imagen;
+
+                                    formProd.style.display = "block";
+                                    formProd.txtNombreProd.value = Emarca;
+                                    formProd.txtCategoriaProd.value = Ecategoria;
+                                    formProd["txtDescripcionProd"].value = Edescripcion;
+                                    formProd.txtPrecioProd.value = Eprecio;
+                                    formProd.txtStockProd.value = Estock;
+                                    updatePrevImg.style.display = "block";
+                                    updatePrevImg.src = Eimg;
+                                }
+                            })
+
+                            fileUpdateImg.onchange = () => {
+                                const dataFiles = fileUpdateImg.files;
+
+                                for (const file of dataFiles) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = (event) => {
+                                        updatePrevImg.src = event.target.result;
+                                        // updatePrevImg.style.display = "block";
+                                    }
+                                    reader.readAsDataURL(file);
+                                }
+
+                            }
+                        }
+                    })
+                }
+
+                // ELIMINAR PRODUCTO
+                btnDeleteProducto = () => {
+                    let btnEliProducto = document.querySelectorAll(".btnEliminarProducto");
+
+                    btnEliProducto.forEach((posicion, i) => {
+                        btnEliProducto[i].onclick = () => {
+                            Swal.fire({
+                                position: 'top-end',
+                                title: 'Este Producto se eliminara completamente',
+                                // text: "Este Producto se eliminara, desea continuar?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Continuar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    formProd.style.display = "none";
+                                    let row = btnEliProducto[i].parentElement.parentElement;
+                                    let idTable = row.children[6].innerHTML;
+
+                                    admin_products_disponibles.forEach((e) => {
+                                        if (idTable == e.ID) {
+                                            indexPosicion = admin_products_disponibles.indexOf(e);
+                                            admin_products_disponibles.splice(indexPosicion, 1);
+                                        }
+                                    })
+                                    tableBodyDisponibles.innerHTML = "";
+                                    showElementsArray();
+                                    // console.log("eliminar");
+                                    // Swal.fire('Saved!', '', 'success')
+                                }
+                            })
+                        }
+                    })
+                }
+
+                // MOSTRAR TODOS LOS ELEMENTOS DENTRO DEL ARRAY
+                tableBodyDisponibles.innerHTML = "";
+                showElementsArray = () => {
+
+                    admin_products_disponibles.forEach((e) => {
+
+                        tableBodyDisponibles.innerHTML += `
+                        <tr>
+                            <td class="button-td">
+                                <span class="btnEditarProducto"><i class="fas fa-edit"></i></span>
+                                <span class="btnEliminarProducto"><i class="fas fa-trash-alt"></i></span>
+                            </td>
+                            <td>
+                                <img class="img-table"
+                                    src="${e.imagen}"
+                                    alt="${e.marca} - ${e.categoria}"
+                                >
+                            </td>
+                            <td><div class="td-primary"><div class="td-primary-pseudo">${e.marca}</div></div></td>
+                            <td class="td-descripcion"><div class="td-descripcion-pseudo">
+                                ${e.descripcion}
+                            </div></td>
+                            <td><div class="td-primary"><div class="td-primary-pseudo"><span>S/</span><span>${e.precio}</span></div></div</td>
+                            <td><div class="td-primary"><div class="td-primary-pseudo"><span>${e.stock}</span><span>u.</span></div></div></td>
+                            <td style="display:none">${e.ID}</td>
+                        </tr>
+                    `;
+                    })
+
+                    localStorage.admin_pd = JSON.stringify(admin_products_disponibles);
+                    btnEditProduct();
+                    btnDeleteProducto();
+                }
+                showElementsArray();
+
+                // FORMULARIO PARA ACTUALIZAR DATOS
+                formUpdateSubmit = () => {
+                    formProd.onsubmit = (e) => {
+                        e.preventDefault();
+                        let newMarca = formProd.txtNombreProd.value.toUpperCase();
+                        let newCategoria = formProd.txtCategoriaProd.value.toUpperCase();
+                        let newDescripcion = formProd["txtDescripcionProd"].value.toUpperCase();
+                        let newPrecio = formProd.txtPrecioProd.value;
+                        let newStock = formProd.txtStockProd.value;
+                        let newImg = updatePrevImg.src;
+
+                        if (newStock > 0) {
+                            admin_products_disponibles[indexPosicion].marca = newMarca;
+                            admin_products_disponibles[indexPosicion].categoria = newCategoria;
+                            admin_products_disponibles[indexPosicion].descripcion = newDescripcion;
+                            admin_products_disponibles[indexPosicion].precio = newPrecio;
+                            admin_products_disponibles[indexPosicion].stock = newStock;
+                            admin_products_disponibles[indexPosicion].imagen = newImg;
+                        }
+
+                        else if (newStock == 0) {
+                            c_product_agotados++;
+                            admin_products_disponibles.splice(indexPosicion, 1);
+                            admin_products_agotados.push({
+                                ID: c_product_agotados,
+                                marca: newMarca,
+                                categoria: newCategoria,
+                                descripcion: newDescripcion,
+                                precio: newPrecio,
+                                stock: newStock,
+                                imagen: newImg
+                            })
+                        }
+
+
+
+                        tableBodyDisponibles.innerHTML = "";
+                        showElementsArray();
+
+                        formProd.reset();
+                        updatePrevImg.style.display = "none";
+                        formProd.style.display = "none";
+                    }
+                }
+                formUpdateSubmit();
+
+                // CERRAR EL FORMULARIO DE ACTUALIZACION
+                btnCerrarForm.onclick = () => {
+                    formProd.style.display = "none";
+                }
+
+                // AGREGAR NUEVO PRODUCTO
+                addNewProduct = () => {
+                    let imgnone = document.querySelector(".AddPrevimgRefProd");
+                    var btnAddProducto = document.querySelector(".btn-add-producto");
+                    btnAddProducto.onclick = () => {
+                        // AddFormProd.style.display = "block";
+                        formProd.style.display = "none";
+                        let form = document.querySelector(".AddmyFormProducto");
+                        let closeForm = document.querySelector(".AddbtnCloseForm");
+                        form.style.display = "block";
+
+                        let input = document.querySelector("#fileAddimgRefProd");
+                        input.onchange = () => {
+                            const dataFiles = input.files;
+
+                            for (let file of dataFiles) {
+                                var reader = new FileReader();
+                                reader.onload = (event) => {
+                                    document.querySelector(".AddPrevimgRefProd").src = event.target.result;
+                                    imgnone.style.display = "block";
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        }
+
+                        form.onsubmit = (e) => {
+                            e.preventDefault();
+                            let Addprod = form["txtAddNombreProd"].value.toUpperCase();
+                            let AddCat = form["txtAddCategoriaProd"].value;
+                            let Adddesc = form["txtAddDescripcionProd"].value.toUpperCase();
+                            let Addprec = form["txtAddPrecioProd"].value;
+                            let Addstock = form["txtAddStockProd"].value;
+                            let AddImg = imgnone.src;
+
+                            c_product_disponibles++;
+                            admin_products_disponibles.push({
+                                ID: c_product_disponibles,
+                                marca: Addprod,
+                                categoria: AddCat,
+                                descripcion: Adddesc,
+                                precio: Addprec,
+                                stock: Addstock,
+                                imagen: AddImg,
+                            })
+
+                            tableBodyDisponibles.innerHTML = "";
+                            showElementsArray();
+                            // showProductsDisponible();
+                            imgnone.style.display = "none";
+                            form.reset();
+                            form.style.display = "none";
+                        }
+
+                        closeForm.onclick = () => {
+                            form.reset();
+                            form.style.display = "none";
+                            btnAddProducto.style.display = "block";
+                        }
+
+                        var btnCerrarForm = document.querySelector(".btnCloseForm");
+                        btnCerrarForm.onclick = () => {
+                            document.querySelector("#myFormProducto").style.display = "none";
+                            btnAddProducto.style.display = "block";
+                        }
+                    }
+                }
+                addNewProduct();
+
+                // BUSCAR PRODUCTO
+                searchProducts = () => {
+                    var inputSearch = document.querySelector(".txtBuscarProductoD");
+
+                    inputSearch.onkeyup = () => {
+                        tableBodyDisponibles.innerHTML = "";
+                        admin_products_disponibles.forEach((e) => {
+                            let dataEncontrar = e.marca.includes(inputSearch.value.toUpperCase());
+                            if (dataEncontrar > 0) {
+                                tableBodyDisponibles.innerHTML += `
+                                <tr>
+                                    <td class="button-td">
+                                        <span class="btnEditarProducto"><i class="fas fa-edit"></i></span>
+                                        <span class="btnEliminarProducto"><i class="fas fa-trash-alt"></i></span>
+                                    </td>
+                                    <td>
+                                        <img class="img-table"
+                                            src="${e.imagen}"
+                                            alt="${e.marca} - ${e.categoria}"
+                                        >
+                                    </td>
+                                    <td><div class="td-primary"><div class="td-primary-pseudo">${e.marca}</div></div></td>
+                                    <td class="td-descripcion"><div class="td-descripcion-pseudo">
+                                        ${e.descripcion}
+                                    </div></td>
+                                    <td><div class="td-primary"><div class="td-primary-pseudo"><span>S/</span><span>${e.precio}</span></div></div</td>
+                                    <td><div class="td-primary"><div class="td-primary-pseudo"><span>${e.stock}</span><span>u.</span></div></div></td>
+                                    <td style="display:none">${e.ID}</td>
+                                </tr>
+                            `;
+                                btnEditProduct();
+                                btnDeleteProducto();
+                            }
+                        })
+                    }
+                }
+                searchProducts();
+            
+            
+            
+            
+            
+            
+            }
+            AvailableProducts();
+            
+            ///////////////////////////////////////////  PRODUCTOS AGOTADOS  ///////////////////////////////////////////
+            SoldOutProducts = () => {
+                var PAformulario = document.forms["PA-myFormProducto"];
+                var PABodyTable = document.querySelector(".PA-table-body-productos");
+                var PAprevImg = document.querySelector(".PA-PrevimgRefProd");
+                var PAfileImg = document.querySelector("#PA-fileImgRefProd");
+                var PAcerrarForm = document.querySelector(".PA-btnCloseForm");
+                var indexPosicion;
+
+                // EDITAR PRODUCTO
+                PAbtnEditProduct = () => {
+                    let PAbtnEditProducto = document.querySelectorAll(".PA-btnEditarProducto");
+
+                    PAbtnEditProducto.forEach((posicion, i) => {
+                        PAbtnEditProducto[i].onclick = () => {
+                            PAformulario.style.display = "block";
+                            window.scrollTo({ top: 150, behavior: 'smooth' });
+
+                            var rowFila = PAbtnEditProducto[i].parentElement.parentElement;
+                            var idTable = parseInt(rowFila.children[6].innerHTML);
+
+                            admin_products_agotados.forEach((e) => {
+                                if (idTable == e.ID) {
+                                    indexPosicion = admin_products_agotados.indexOf(e);
+
+                                    PAformulario["PA-txtNombreProd"].value = e.marca;
+                                    PAformulario["PA-txtCategoriaProd"].value = e.categoria;
+                                    PAformulario["PA-txtDescripcionProd"].value = e.descripcion;
+                                    PAformulario["PA-txtPrecioProd"].value = e.precio;
+                                    PAformulario["PA-txtStockProd"].value = e.stock;
+                                    PAprevImg.style.display = "block";
+                                    PAprevImg.src = e.imagen;
+                                }
+                            })
+
+
+                            PAfileImg.onchange = () => {
+                                const dataFiles = PAfileImg.files;
+
+                                for (const file of dataFiles) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = (event) => {
+                                        PAprevImg.src = event.target.result;
+                                    }
+                                    reader.readAsDataURL(file);
+                                }
+
+                            }
+                        }
+                    })
+                }
+
+                // ELIMINAR PRODUCTO
+                PAbtnDeleteProducto = () => {
+                    let PAbtndeleteProducto = document.querySelectorAll(".PA-btnEliminarProducto");
+
+                    PAbtndeleteProducto.forEach((posicion, i) => {
+                        PAbtndeleteProducto[i].onclick = () => {
+                            Swal.fire({
+                                position: 'top-end',
+                                title: 'Este Producto se eliminara completamente',
+                                // text: "Este Producto se eliminara, desea continuar?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Continuar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    PAformulario.style.display = "none";
+                                    let row = PAbtndeleteProducto[i].parentElement.parentElement;
+                                    let idTable = row.children[6].innerHTML;
+
+                                    admin_products_agotados.forEach((e) => {
+                                        if (idTable == e.ID) {
+                                            indexPosicion = admin_products_agotados.indexOf(e);
+                                            admin_products_agotados.splice(indexPosicion, 1);
+                                            // console.log(array_products_disponibles.indexOf(e));
+                                        }
+                                    })
+                                    PABodyTable.innerHTML = "";
+                                    PAshowElementsArray();
+                                    // console.log("eliminar");
+                                    // Swal.fire('Saved!', '', 'success')
+                                }
+                            })
+                        }
+                    })
+                }
+
+                // MOSTRAR LOS ELEMENTOS DEL ARRAY
+                PABodyTable.innerHTML = "";
+                PAshowElementsArray = () => {
+                    admin_products_agotados.forEach((e) => {
+                        PABodyTable.innerHTML += `
+                            <tr>
+                                <td class="button-td">
+                                    <span class="PA-btnEditarProducto"><i class="fas fa-edit"></i></span>
+                                    <span class="PA-btnEliminarProducto"><i class="fas fa-trash-alt"></i></span>
+                                </td>
+                                <td>
+                                    <img class="img-table"
+                                        src="${e.imagen}"
+                                        alt="${e.marca} - ${e.categoria}">
+                                </td>
+                                <td>
+                                    <div class="td-primary">
+                                        <div class="td-primary-pseudo">${e.marca}</div>
+                                    </div>
+                                </td>
+                                <td class="td-descripcion">
+                                    <div class="td-descripcion-pseudo">
+                                        ${e.descripcion}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="td-primary">
+                                        <div class="td-primary-pseudo"><span>S/</span><span>${e.precio}</span></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="td-primary">
+                                        <div class="td-primary-pseudo"><span>${e.stock}</span><span>u.</span></div>
+                                    </div>
+                                </td>
+                                <td style="display:none">${e.ID}</td>
+                            </tr>
+                        `;
+                    })
+
+                    localStorage.admin_pa = JSON.stringify(admin_products_agotados);
+
+                    PAbtnEditProduct();
+                    PAbtnDeleteProducto();
+                }
+                PAshowElementsArray();
+
+                // FORMULARIO SUBMIT PARA ACTUALZAR DATOS
+                PAformSubmit = () => {
+                    PAformulario.onsubmit = (e) => {
+                        e.preventDefault();
+                        let newMarca = PAformulario["PA-txtNombreProd"].value.toUpperCase();
+                        let newCategoria = PAformulario["PA-txtCategoriaProd"].value.toUpperCase();
+                        let newDescipcion = PAformulario["PA-txtDescripcionProd"].value.toUpperCase();
+                        let newPrecio = PAformulario["PA-txtPrecioProd"].value;
+                        let newStock = PAformulario["PA-txtStockProd"].value;
+                        let newImg = PAprevImg.src;
+
+                        if (newStock > 0) {
+                            c_product_disponibles++;
+                            admin_products_agotados.splice(indexPosicion, 1);
+                            admin_products_disponibles.push({
+                                ID: c_product_disponibles,
+                                marca: newMarca,
+                                categoria: newCategoria,
+                                descripcion: newDescipcion,
+                                precio: newPrecio,
+                                stock: newStock,
+                                imagen: newImg
+                            })
+                        }
+                        else if (newStock == 0) {
+                            admin_products_agotados[indexPosicion].marca = PAformulario["PA-txtNombreProd"].value.toUpperCase();
+                            admin_products_agotados[indexPosicion].categoria = PAformulario["PA-txtCategoriaProd"].value.toUpperCase();
+                            admin_products_agotados[indexPosicion].descripcion = PAformulario["PA-txtDescripcionProd"].value.toUpperCase();
+                            admin_products_agotados[indexPosicion].precio = PAformulario["PA-txtPrecioProd"].value;
+                            admin_products_agotados[indexPosicion].stock = PAformulario["PA-txtStockProd"].value;
+                            admin_products_agotados[indexPosicion].imagen = PAprevImg.src;
+                        }
+
+                        PABodyTable.innerHTML = "";
+                        PAshowElementsArray();
+
+                        PAformulario.reset();
+                        PAprevImg.style.display = "none";
+                        PAformulario.style.display = "none";
+                    }
+                }
+                PAformSubmit();
+
+                // CERRAR EL FORMULARIO DE ACTUALIZACION
+                PAcerrarForm.onclick = () => {
+                    PAformulario.reset();
+                    PAformulario.style.display = "none";
+                }
+
+                // BUSCAR PRODUCTO
+                PAsearchProducts = () => {
+                    var PAinputSearch = document.querySelector(".PA-txtBuscarProducto");
+
+                    PAinputSearch.onkeyup = () => {
+                        PABodyTable.innerHTML = "";
+                        admin_products_agotados.forEach((e) => {
+                            let dataEncontrar = e.marca.includes(PAinputSearch.value.toUpperCase());
+                            if (dataEncontrar > 0) {
+                                PABodyTable.innerHTML += `
+                                    <tr>
+                                        <td class="button-td">
+                                            <span class="PA-btnEditarProducto"><i class="fas fa-edit"></i></span>
+                                            <span class="PA-btnEliminarProducto"><i class="fas fa-trash-alt"></i></span>
+                                        </td>
+                                        <td>
+                                            <img class="img-table"
+                                                src="${e.imagen}"
+                                                alt="${e.marca} - ${e.categoria}">
+                                        </td>
+                                        <td>
+                                            <div class="td-primary">
+                                                <div class="td-primary-pseudo">${e.marca}</div>
+                                            </div>
+                                        </td>
+                                        <td class="td-descripcion">
+                                            <div class="td-descripcion-pseudo">
+                                                ${e.descripcion}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="td-primary">
+                                                <div class="td-primary-pseudo"><span>S/</span><span>${e.precio}</span></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="td-primary">
+                                                <div class="td-primary-pseudo"><span>${e.stock}</span><span>u.</span></div>
+                                            </div>
+                                        </td>
+                                        <td style="display:none">${e.ID}</td>
+                                    </tr>
+                                `;
+                                PAbtnEditProduct();
+                                PAbtnDeleteProducto();
+                            }
+                        })
+                    }
+                }
+                PAsearchProducts();
+            }
+            SoldOutProducts();
+        }
+
+        AdminVentas = () => {
+            var tbodyVentas = document.querySelector(".CV-table-body-ventas");
+            admin_ventas_registrados = JSON.parse(localStorage.admin_ventas);
+            admin_usuarios_registrados = JSON.parse(localStorage.admin_usuarios);
+
+            showItemsVentas = () => {
+                // console.log(admin_ventas_registrados);
+                counter_ventas = admin_ventas_registrados.length;
+                admin_ventas_registrados.forEach((posicion, i) => {
+                    var inner = admin_usuarios_registrados.filter(e => e.ID == admin_ventas_registrados[i].ID_USER);
+                    let total = "";
+                    let condicion = "";
+                    let fecha = "";
+                    total = admin_ventas_registrados[i].TOTAL;
+                    condicion = admin_ventas_registrados[i].CONDICION;
+                    fecha = admin_ventas_registrados[i].FECHA;
+
+                    inner.forEach((posicion, i) => {
+                        tbodyVentas.innerHTML += `
+                            <tr>
+                                <td class="button-td">
+                                    <span class="CV-btnEliminarVenta"><i class="fas fa-trash-alt"></i></span>
+                                </td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${inner[i].nombre.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${inner[i].apellido.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${inner[i].DNI}</div></div></td>
+                                <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${inner[i].correo.toUpperCase()}</div></div></td>
+                                <td>${fecha}</td>
+                                <td>S/${total}</td>
+
+                                <td>${condicion.toUpperCase()}</td>
+                                <td style="display:none">${admin_usuarios_registrados[i].ID_USER}</td>
+                            </tr>
+                        `;
+                    })
+                });
+            }
+            showItemsVentas();
+
+            searchVentas = () => {
+                var input = document.querySelector(".CV-txtBuscarVentas");
+
+                input.onkeyup = () => {
+                    tbodyVentas.innerHTML = "";
+                    admin_ventas_registrados.forEach((posicion, i)=>{
+                        let user_compra = admin_usuarios_registrados.filter(e=>e.ID == admin_ventas_registrados[i].ID_USER);
+                        // console.log(user_compra.includes(e=>))
+                        let total = admin_ventas_registrados[i].TOTAL;
+                        let condicion = admin_ventas_registrados[i].CONDICION;
+                        let fecha = admin_ventas_registrados[i].FECHA;
+                        
+                        user_compra.forEach((posicion, i)=>{
+                            let data = user_compra[i].nombre.includes(input.value.toUpperCase());
+
+                            if (data > 0){
+                            tbodyVentas.innerHTML += `
+                                <tr>
+                                    <td class="button-td">
+                                        <span class="CV-btnEliminarVenta"><i class="fas fa-trash-alt"></i></span>
+                                    </td>
+                                    <td><div class="td-overflow"><div class="td-text-overflow">${user_compra[i].nombre.toUpperCase()}</div></div></td>
+                                    <td><div class="td-overflow"><div class="td-text-overflow">${user_compra[i].apellido.toUpperCase()}</div></div></td>
+                                    <td><div class="td-overflow"><div class="td-text-overflow">${user_compra[i].DNI}</div></div></td>
+                                    <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${user_compra[i].correo.toUpperCase()}</div></div></td>
+                                    <td>${fecha}</td>
+                                    <td>S/${total}</td>
+                                    <td>${condicion.toUpperCase()}</td>
+                                    <td style="display:none">${admin_usuarios_registrados[i].ID_USER}</td>
+                                </tr>
+                            `;
+                            }
+                        })
+                    })
+                }
+            }
+            searchVentas();
+        }
+        
+        var counter_ventas;
+        var counter_usuarios;
+        AdminClientes = () => {
+            var inputCliente = document.querySelector(".CCL-txtBuscarCliente");
+            var tbodyCliente = document.querySelector(".CCL-table-body-clientes");
+            admin_usuarios_registrados = JSON.parse(localStorage.admin_usuarios);
+
+            // ELIMINAR CLIENTE
+            deleteClientes = () => {
+                let btnDelete = document.querySelectorAll(".CCL-btnEliminarCliente");
+
+                btnDelete.forEach((posicion, i) => {
+                    btnDelete[i].onclick = () => {
+                        Swal.fire({
+                            position: 'top-end',
+                            title: 'Este Cliente se eliminara completamente',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Continuar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                let idTable = btnDelete[i].parentElement.parentElement.children[6].innerHTML;
+                                let index;
+                                admin_usuarios_registrados.forEach((e) => {
+                                    if (idTable == e.ID) {
+                                        index = admin_usuarios_registrados.indexOf(e);
+                                        console.log(e);
+                                        admin_usuarios_registrados.splice(index, 1);
+                                        console.log(admin_usuarios_registrados);
+                                    }
+                                })
+                            }
+                            tbodyCliente.innerHTML = "";
+                            showItemsClientes();
+                        })
+
+                    }
+                })
+            }
+
+            // MOSTRAR DATOS
+            showItemsClientes = () => {
+                counter_usuarios = admin_usuarios_registrados.length;
+                admin_usuarios_registrados.forEach((e) => {
+                    tbodyCliente.innerHTML += `
+                        <tr>
+                            <td class="button-td">
+                                <span class="CCL-btnEliminarCliente"><i class="fas fa-trash-alt"></i></span>
+                            </td>
+                            <td>
+                                <img class="img-table" src="${e.IMGperfil}" alt="${e.correo}">
+                            </td>
+                            <td><div class="td-overflow"><div class="td-text-overflow">${e.nombre.toUpperCase()}</div></div></td>
+                            <td><div class="td-overflow"><div class="td-text-overflow">${e.apellido.toUpperCase()}</div></div></td>
+                            <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${e.DNI}</div></div></td>
+                            <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${e.correo.toUpperCase()}</div></div></td>
+                            <td style="display:none">${e.ID}</td>
+                        </tr>
+                    `;
+                })
+                deleteClientes();
+            }
+            showItemsClientes();
+
+            // BUSCAR CLIENTE
+            searchClientes = () => {
+                inputCliente.onkeyup = () => {
+                    tbodyCliente.innerHTML = "";
+
+                    admin_usuarios_registrados.forEach((e) => {
+                        var dataEncontrada = e.nombre.includes(inputCliente.value.toUpperCase());
+                        
+                        if (dataEncontrada > 0) {
+                            tbodyCliente.innerHTML += `
+                                <tr>
+                                    <td class="button-td">
+                                        <span class="CCL-btnEliminarCliente"><i class="fas fa-trash-alt"></i></span>
+                                    </td>
+                                    <td>
+                                        <img class="img-table" src="${e.IMGperfil}" alt="${e.correo}">
+                                    </td>
+                                    <td><div class="td-overflow"><div class="td-text-overflow">${e.nombre.toUpperCase()}</div></div></td>
+                                    <td><div class="td-overflow"><div class="td-text-overflow">${e.apellido.toUpperCase()}</div></div></td>
+                                    <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${e.DNI}</div></div></td>
+                                    <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${e.correo.toUpperCase()}</div></div></td>
+                                    <td style="display:none">${e.ID}</td>
+                                </tr>
+                            `;
+                            deleteClientes();
+                        }
+                    })
+                }
+            }
+            searchClientes();
+        }
+        
+        AdminEmpleados = () => {
+            var inputVendedores = document.querySelector(".CEV-txtBuscarEmpleado");
+            var tbodyVendedores = document.querySelector(".CEV-table-body-empleados-vendedores");
+            var inputRepartidores = document.querySelector(".CER-txtBuscarEmpleado");
+            var tbodyRepartidores = document.querySelector(".CER-table-body-empleados-repartidores");
+            admin_empleados_registrados = JSON.parse(localStorage.admin_empleados);
+
+            // AGREGAR EMPLEADO
+            AddEmpleado = () => {
+                var form = document.forms["AddEmpleado"];
+                var btnAddEmp = document.querySelector(".link-add-emp");
+                var btnCloseform = document.querySelector(".closeForm");
+                var contenedorAddEmp = document.querySelector(".contenedor-registro-empleados");
+                var imgPrev = document.querySelector(".AddPrevimgRefEmp");
+                var imgForm = document.querySelector("#AE-fileImg");
+
+                btnAddEmp.onclick = () => {
+                    contenedorAddEmp.style.display = "block";
+                    var addEmpImg;
+
+
+                    showprevImg = () => {
+                        imgForm.onchange = () => {
+                            // RECOGEMOS TODA LA INFORMACION DENTRO DEL INPUT
+                            const dataFile = imgForm.files;
+                            // RECORREMOS TODA LA DATAFILE
+                            for (const data of dataFile) {
+                                // UN FILEREADER VA A ENCRIPTAR LA IMG
+                                var reader = new FileReader();
+                                // CUANDO ESTE CARGUE IMPRIMIMOS EL RESULTADO
+                                reader.onload = (event) => {
+                                    imgPrev.style.display = "block";
+                                    imgPrev.src = event.target.result;
+                                    addEmpImg = event.target.result;
+                                }
+                                // SIN ESTE METODO DE LECTURA NO SE VA A PODER LEER LA IMG
+                                reader.readAsDataURL(data);
+                            }
+                        }
+                    }
+                    showprevImg();
+
+                    form.onsubmit = (e) => {
+                        e.preventDefault();
+                        let addEmpNom = form["AE-txtNombre"].value;
+                        let addEmpApe = form["AE-txtApellido"].value;
+                        let addEmpCorreo = form["AE-txtCorreo"].value;
+                        let addEmpClave = form["AE-txtClave"].value;
+                        let addEmpCargo = form["AE-txtCargo"].value;
+                        let addEmpDNI = form["AE-txtDNI"].value;
+
+
+                        if (imgForm.value.length == 0) {
+                            addEmpImg = "../../IMG/userlogin.png";
+                        }
+
+                        c_admin_empleados++;
+                        admin_empleados_registrados.push({
+                            ID: c_admin_empleados,
+                            nombre: addEmpNom,
+                            apellido: addEmpApe,
+                            correo: addEmpCorreo,
+                            clave: addEmpClave,
+                            DNI: addEmpDNI,
+                            cargo: addEmpCargo,
+                            IMGperfil: addEmpImg
+                        })
+                        localStorage.admin_empleados = JSON.stringify(admin_empleados_registrados);
+                        form.reset();
+                        contenedorAddEmp.style.display = "none";
+                        imgPrev.style.display = "none";
+                    }
+
+                    btnCloseform.onclick = () => {
+                        console.log("click");
+                        contenedorAddEmp.style.display = "none";
+                    }
+                }
+            }
+            AddEmpleado();
+
+            Admin_emp_vendedores = () => {
+                var admin_emp_vendedores = admin_empleados_registrados.filter(e => e.cargo == "Vendedor");
+
+                // ELIMINAR VENDEDOR
+                deleteEmpVendedor = () => {
+                    let btnDelete = document.querySelectorAll(".CEV-btnEliminarEmpleado");
+
+                    btnDelete.forEach((posicion, i) => {
+                        btnDelete[i].onclick = () => {
+                            Swal.fire({
+                                position: 'top-end',
+                                title: 'Este Cliente se eliminara completamente',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Continuar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    let idTable = btnDelete[i].parentElement.parentElement.children[6].innerHTML;
+                                    let index;
+                                    admin_empleados_registrados.forEach((e) => {
+                                        if (idTable == e.ID) {
+                                            index = admin_empleados_registrados.indexOf(e);
+                                            admin_empleados_registrados.splice(index, 1);
+                                        }
+                                    })
+                                }
+                                tbodyVendedores.innerHTML = "";
+                                showItemsEmpVendedor();
+                                console.log(admin_empleados_registrados);
+                            })
+
+                        }
+                    })
+                    localStorage.admin_empleados = JSON.stringify(admin_empleados_registrados);
+                }
+
+                // MOSTRAR DATOS
+                showItemsEmpVendedor = () => {
+                    var admin_emp_vendedores = admin_empleados_registrados.filter(e => e.cargo == "Vendedor");
+                    
+                    admin_emp_vendedores.forEach((posicion, i) => {
+                        tbodyVendedores.innerHTML += `
+                            <tr>
+                                <td class="button-td">
+                                    <span class="CEV-btnEliminarEmpleado"><i class="fas fa-trash-alt"></i></span>
+                                </td>
+                                <td>
+                                    <img class="img-table" src="${admin_emp_vendedores[i].IMGperfil}" alt="${admin_emp_vendedores[i].correo.toUpperCase()}">
+                                </td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].nombre.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].apellido.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${admin_emp_vendedores[i].correo.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].cargo.toUpperCase()}</div></div></td>
+                                <td style="display:none">${admin_emp_vendedores[i].ID}</td>
+                            </tr>
+                        `;
+                    })
+                    deleteEmpVendedor();
+                }
+                showItemsEmpVendedor();
+
+                // BUSCAR CLIENTE
+                searchEmpVendedor = () => {
+                    inputVendedores.onkeyup = () => {
+                        tbodyVendedores.innerHTML = "";
+
+                        admin_emp_vendedores.forEach((position, i) => {
+                            var dataEncontrada = admin_emp_vendedores[i].nombre.includes(inputVendedores.value.toUpperCase());
+                            if (dataEncontrada > 0) {
+                                tbodyVendedores.innerHTML += `
+                                    <tr>
+                                        <td class="button-td">
+                                            <span class="CEV-btnEliminarEmpleado"><i class="fas fa-trash-alt"></i></span>
+                                        </td>
+                                        <td>
+                                            <img class="img-table" src="${admin_emp_vendedores[i].IMGperfil}" alt="${admin_emp_vendedores[i].correo}">
+                                        </td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].nombre.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].apellido.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${admin_emp_vendedores[i].correo.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_vendedores[i].cargo.toUpperCase()}</div></div></td>
+                                        <td style="display:none">${admin_emp_vendedores[i].ID}</td>
+                                    </tr>
+                                `;
+                                deleteEmpVendedor();
+                            }
+                        })
+                    }
+                }
+                searchEmpVendedor();
+            }
+            Admin_emp_vendedores();
+
+            Admin_emp_repartidores = () => {
+                var admin_emp_repartidores = admin_empleados_registrados.filter(e => e.cargo == "Repartidor");
+
+                // ELIMINAR CLIENTE
+                deleteEmpRepartidor = () => {
+                    let btnDelete = document.querySelectorAll(".CER-btnEliminarEmpleado");
+
+                    btnDelete.forEach((posicion, i) => {
+                        btnDelete[i].onclick = () => {
+                            Swal.fire({
+                                position: 'top-end',
+                                title: 'Este Empleado se eliminara completamente',
+                                // text: "Este Producto se eliminara, desea continuar?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Continuar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    let idTable = btnDelete[i].parentElement.parentElement.children[6].innerHTML;
+                                    let index;
+                                    admin_emp_repartidores.forEach((e) => {
+                                        if (idTable == e.ID) {
+                                            index = admin_emp_repartidores.indexOf(e);
+                                            admin_emp_repartidores.splice(index, 1);
+                                            console.log(admin_emp_repartidores);
+                                        }
+                                    })
+                                }
+                                tbodyRepartidores.innerHTML = "";
+                                showItemsEmpRepartidor();
+                            })
+
+                        }
+                    })
+                }
+
+                // MOSTRAR DATOS
+                showItemsEmpRepartidor = () => {
+                    admin_emp_repartidores.forEach((posicion, i) => {
+                        tbodyRepartidores.innerHTML += `
+                            <tr>
+                                <td class="button-td">
+                                    <span class="CER-btnEliminarEmpleado"><i class="fas fa-trash-alt"></i></span>
+                                </td>
+                                <td>
+                                    <img class="img-table" src="${admin_emp_repartidores[i].IMGperfil}" alt="${admin_emp_repartidores[i].correo}">
+                                </td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].nombre.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].apellido.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${admin_emp_repartidores[i].correo.toUpperCase()}</div></div></td>
+                                <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].cargo.toUpperCase()}</div></div></td>
+                                <td style="display:none">${admin_emp_repartidores[i].ID}</td>
+                            </tr>
+                        `;
+                    })
+                    deleteEmpRepartidor();
+                }
+                showItemsEmpRepartidor();
+
+                // BUSCAR CLIENTE
+                searchEmpRepartidor = () => {
+                    inputRepartidores.onkeyup = () => {
+                        tbodyRepartidores.innerHTML = "";
+
+                        admin_emp_repartidores.forEach((posicion, i) => {
+                            var dataEncontrada = admin_emp_repartidores[i].nombre.includes(inputRepartidores.value.toUpperCase());
+                            if (dataEncontrada > 0) {
+                                tbodyRepartidores.innerHTML += `
+                                    <tr>
+                                        <td class="button-td">
+                                            <span class="CER-btnEliminarEmpleado"><i class="fas fa-trash-alt"></i></span>
+                                        </td>
+                                        <td>
+                                            <img class="img-table" src="${admin_emp_repartidores[i].IMGperfil}" alt="${admin_emp_repartidores[i].correo}">
+                                        </td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].nombre.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].apellido.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow td-overflow-correo"><div class="td-text-overflow">${admin_emp_repartidores[i].correo.toUpperCase()}</div></div></td>
+                                        <td><div class="td-overflow"><div class="td-text-overflow">${admin_emp_repartidores[i].cargo.toUpperCase()}</div></div></td>
+                                        <td style="display:none">${admin_emp_repartidores[i].ID}</td>
+                                    </tr>
+                                `;
+                                deleteEmpRepartidor();
+                            }
+                        })
+                    }
+                }
+                searchEmpRepartidor();
+            }
+            Admin_emp_repartidores();
+        }
+        
+        var cerrarSesion = document.querySelector(".text-drop-cerrar-session");
+        cerrarSesion.onclick = () => {
+            sessionStorage.AdminLogeados = "";
+            // sessionStorage.clear(sessionStorage.AdminLogeados);
+            location.href = "login.html";
+        }
+
+        // TAB VENTANAS DISPLAY
+        showTab = () => {
+            var contentLink = document.querySelectorAll(".content-link");
+            var linkNav = document.querySelectorAll(".link-nav");
+            linkNav.forEach((posicion, i) => {
+                linkNav[i].onclick = () => {
+                    contentLink.forEach((posicion, i) => {
+                        contentLink[i].style.display = "none";
+                    })
+                    contentLink[i].style.display = "block";
+                    AvailableProducts();
+                    SoldOutProducts();
+                    // AdminEmpleados();
+                }
+            });
+        }
+
+        window.onload = () => {
+            addValores();
+            showHideDropDown();
+            showHideNav();
+            AdminClientes();
+            showTab();
+            AdminDashboard();
+            AdminProductos();
+            AdminVentas();
+            AdminEmpleados();
+        }
+        // const hoy = new Date();
+
+        // function convertir(fecha, formato) {
+        //     let mes_actual = fecha.getMonth()+1;
+        //     let convertir_mes = (mes_actual <= 9) ? "0" + mes_actual : mes_actual;
+        //     return formato.replace('mm', convertir_mes)
+        //     .replace('yy', fecha.getFullYear())
+        //     .replace('dd', fecha.getDate());
+        // }
+    </script>
+</body>
+
+</html>

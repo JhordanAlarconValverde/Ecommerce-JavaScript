@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../CSS/admin/loginAdmin.css">
+    <title>Login</title>
+    </style>
+</head>
+
+<body class="body">
+
+    <div class="m-auto mt-5 container-log-reg">
+
+        <div class="container-log">
+            <div class="col-12 m-auto">
+                <h1 class="text-center display-4">Iniciar Sesion</h1>
+                <form action="" class="myFormLogin" id="myFormLogin">
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><b style="font-size: 1.2rem;color: gray">@</b></span>
+                        </div>
+                        <input type="email" class="form-control shadow-none" placeholder="Correo Electronico"
+                            name="txtCorreo" autocomplete="off">
+                    </div>
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><b class="fas fa-lock"
+                                    style="font-size: 1.3rem; padding: 2px 0;color: gray"></b></span>
+                        </div>
+                        <input type="password" class="form-control shadow-none" placeholder="Password"
+                            name="txtPassword" autocomplete="off">
+                    </div>
+                    <div class="mt-2 d-flex align-items-center justify-content-between">
+                        <small>Has olvidado tu contraseña?</small>
+                        <span>Ya te registraste? <b class="displayReg">Registrar</b></span>
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-reg">
+            <div class="col-12 m-auto">
+                <h1 class="text-center display-4">Registrar</h1>
+                <div class="alert alert-danger alert-dismissible fade show position-relative alert-error" role="alert">
+                    <strong>Error!</strong> Las contraseñas no coinciden.
+                    <span class="close-alert-error">&times;</span>
+                </div>
+
+                <div class="alert alert-success alert-dismissible fade show position-relative alert-success"
+                    role="alert">
+                    <span>Cuenta registrada exitosamente</span>
+                    <span class="close-alert-success">&times;</span>
+                </div>
+
+                <form action="" class="myFormRegister" id="myFormRegister">
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 13px"><b class="fas fa-user"
+                                    style="font-size: 1.2rem;color: gray;"></b></span>
+                        </div>
+                        <input type="text" class="form-control shadow-none" placeholder="Nombre" name="txtRegNombre"
+                            autocomplete="off" required>
+                        <input type="text" class="form-control shadow-none" placeholder="Apellido" name="txtRegApellido"
+                            autocomplete="off" required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 7px 12px"><b
+                                    style="font-size: 1.2rem;color: gray">@</b></span>
+                        </div>
+                        <input type="email" class="form-control shadow-none" placeholder="Correo Electronico"
+                            name="txtRegCorreo" autocomplete="off" required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 7px 12px"><b class="fas fa-lock"
+                                    style="font-size: 1.3rem; padding: 2px 0;color: gray"></b></span>
+                        </div>
+                        <input type="password" class="form-control shadow-none" placeholder="Password"
+                            name="txtRegPassword" autocomplete="off" required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 7px 12px"><b class="fas fa-unlock"
+                                    style="font-size: 1.3rem; padding: 2px 0;color: gray"></b></span>
+                        </div>
+                        <input type="password" class="form-control shadow-none" placeholder="Confirmar Password"
+                            name="txtRegPassword2" autocomplete="off" required>
+                    </div>
+                    <div class="mt-2 d-flex align-items-center justify-content-between">
+                        <div>
+                            <input class="form-check-input" type="checkbox" name="checkVer" id="checkVer">
+                            <label for="checkVer" class="form-label">Ver Contraseña</label>
+                        </div>
+                        <div>
+                            <span>Ya tienes una cuenta? <b class="displayLogin">Login</b></span>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success">Aceptar</button>
+                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var dReg = document.querySelector(".displayReg");
+        var dLogin = document.querySelector(".displayLogin");
+        var containerReg = document.querySelector(".container-reg");
+        var containerLog = document.querySelector(".container-log");
+        var alertErrorSucces = document.querySelectorAll(".alert");
+        // ALERT ERROR
+        var alertError = document.querySelector(".alert-error");
+        // CLOSE ALERT ERROR
+        var closeAlertError = alertError.children[1];
+        // ALERT SUCCESS
+        var alertSuccess = document.querySelector(".alert-success");
+        // CLOSE ALERT SUCCESS
+        var closeAlertSuccess = alertSuccess.children[1];
+
+        const formLogin = document.forms["myFormLogin"];
+        const formReg = document.forms["myFormRegister"];
+        const admin_registrados = [];
+        const admin_logeados = []
+        var lc = 0;
+        var rc = 0;
+
+        formReg.onsubmit = (e) => {
+            e.preventDefault();
+            let Rnombre = formReg.txtRegNombre.value;
+            let Rapellido = formReg.txtRegApellido.value;
+            let Rcorreo = formReg.txtRegCorreo.value;
+            let Rp1 = formReg.txtRegPassword.value;
+            let Rp2 = formReg.txtRegPassword2.value;
+            
+            if (Rp1 != Rp2){
+                alertError.style.display = "block";
+                alertSuccess.style.display = "none";
+                formReg.reset();
+            }else{
+                rc++;
+                admin_registrados.push({
+                    ID: rc,
+                    nombre: Rnombre,
+                    apellido: Rapellido,
+                    correo: Rcorreo,
+                    clave: Rp2
+                })
+
+                sessionStorage.AdminRegistrados = JSON.stringify(admin_registrados);
+                alertError.style.display = "none";
+                alertSuccess.style.display = "block";
+                formReg.reset();
+            }
+        }
+
+        formLogin.onsubmit = (e)=>{
+            e.preventDefault();
+            // let Lnombre = formLogin.txtNombre.value;
+            let Lcorreo = formLogin.txtCorreo.value;
+            let Lclave = formLogin.txtPassword.value;
+
+            let personas = JSON.parse(sessionStorage.AdminRegistrados);
+            personas.forEach((e)=>{
+                if (e.correo == Lcorreo && e.clave == Lclave){
+                    lc++;
+                    admin_logeados.push({
+                        ID: lc,
+                        nombre: e.nombre,
+                        apellido: e.apellido,
+                        correo: e.correo,
+                        clave: e.clave
+                    })
+
+                    sessionStorage.AdminLogeados = JSON.stringify(admin_logeados);
+
+                    console.log("session iniciada");
+                    location.href = "admin.html";
+                }else{
+                    console.log("session no iniciada");
+                }
+            })
+        }
+
+
+        dReg.onclick = () => {
+            setTimeout(() => {
+                containerLog.style.display = "none";
+                containerReg.style.display = "block";
+            }, 700);
+        }
+        dLogin.onclick = () => {
+            setTimeout(() => {
+                containerLog.style.display = "block";
+                containerReg.style.display = "none";
+                formReg.reset();
+            }, 700);
+        }
+        alertErrorSucces.forEach((posicion, i) => {
+            alertErrorSucces[i].style.display = "none";
+        })
+        closeAlertError.onclick = ()=>{
+            closeAlertError.parentElement.style.display = "none";
+        }
+        closeAlertSuccess.onclick = ()=>{
+            closeAlertSuccess.parentElement.style.display = "none";
+        }
+    
+        
+    </script>
+</body>
+
+</html>
